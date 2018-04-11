@@ -19,13 +19,13 @@ public class List {
 		root.setPre(null);
 
 	    node.setNext(null);
-	    node.setPre(null);
+	    node.setPre(null);//not needed
 	    return true;
 	}
 	if (node.getNext() == null) {
 	    last = node.getPre();
 	    last.setNext(null);
-	    node.setNext(null);
+	    node.setNext(null);//not needed
 	    node.setPre(null);
 	    return true;
 	}
@@ -42,16 +42,16 @@ public class List {
 	if (isEmpty()) {
 	    root = node;
 	    last = node;
-	} else if (last.getPre() == null) {
+	} else {
+	    node.setNext(null); //not needed
 	    node.setPre(last);
 	    last.setNext(node);
 	    last = last.getNext();
 	}
     }
 
-    public void moveToLast(Node node)
-    {
-	
+    public void moveToLast(Node node) {
+
     }
 
     public Boolean isEmpty() {
