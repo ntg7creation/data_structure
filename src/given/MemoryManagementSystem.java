@@ -7,6 +7,7 @@ package given;
  */
 import java.util.Arrays;
 
+
 public class MemoryManagementSystem {
     public String[] secondaryMemory;
     private boolean useLRU;
@@ -15,6 +16,8 @@ public class MemoryManagementSystem {
     private int hardrive;
     private Node[] memoryPointer;
     private List mainMemory;
+    
+    
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
 	// ADD YOUR CODE HERE
@@ -25,6 +28,7 @@ public class MemoryManagementSystem {
 	if (useLRU) {
 	    MemoryManagementSystemLRU();
 	} else {
+	
 	}
     }
 
@@ -32,6 +36,10 @@ public class MemoryManagementSystem {
 	memoryPointer = new Node[hardrive];
 	mainMemory = new List();
     }
+    
+
+
+    
 
     @Override
     public String toString() {
