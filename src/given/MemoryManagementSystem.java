@@ -16,11 +16,11 @@ public class MemoryManagementSystem {
     private int hardrive;
     private Node[] memoryPointer;
     private List mainMemory;
+    private Queue mainMemoryAsQueue;
     
     
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
-	// ADD YOUR CODE HERE
 	secondaryMemory = new String[secondaryMemorySize];
 	ram = mainMemorySize;
 	hardrive = secondaryMemorySize;
@@ -28,7 +28,7 @@ public class MemoryManagementSystem {
 	if (useLRU) {
 	    MemoryManagementSystemLRU();
 	} else {
-	
+		MemoryManagementSystemFifo();
 	}
     }
 
@@ -37,7 +37,10 @@ public class MemoryManagementSystem {
 	mainMemory = new List();
     }
     
-
+    private void MemoryManagementSystemFifo() {
+    	mainMemoryAsQueue = new Queue ( ram ,hardrive );
+    	
+    }
 
     
 
@@ -47,11 +50,23 @@ public class MemoryManagementSystem {
     }
 
     public String read(int index) {
-	// ADD YOUR CODE HERE
-	return null;
+    	String element = secondaryMemory[index];
+    	if (useLRU) {
+    		
+    	}
+    	else {
+    		element = (String) mainMemoryAsQueue.enqueue(element, ram, index , false , ' ');
+    	}
+	return element;
     }
 
     public void write(int index, char c) {
-	// ADD YOUR CODE HERE
+    	String element = secondaryMemory[index];
+    	if (useLRU) {
+    		
+    	}
+    	else {
+    		element = mainMemoryAsQueue.enqueue(element, ram, index , true , c);
+    	}
     }
 }
