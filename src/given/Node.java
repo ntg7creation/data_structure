@@ -5,9 +5,9 @@ public class Node {
     private Node next;
     private Node pre;
     private Page data;
-    public Node(String info) {
+    public Node(Page info) {
 	
-	data = new Page(info);
+	data = info;
     }
     public Page getData() {
         return data;

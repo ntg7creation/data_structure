@@ -74,6 +74,7 @@ public class List {
 
     }
 
+    //LRU remove
     public Node getAndRemoveFirst() {
 	Node temp = root;
 	removeNode(temp);

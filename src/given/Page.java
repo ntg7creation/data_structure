@@ -8,9 +8,11 @@ package given;
 public class Page {
     // ADD YOUR CODE HERE
     private String info;
+    private int home;
 
-    public Page(String info) {
+    public Page(String info, int home) {
 	this.info = info; // strcopy
+	this.home = home;
     }
 
     public void write(char c) {
@@ -19,5 +21,9 @@ public class Page {
 
     public String read() {
 	return info;
+    }
+
+    public int getHome() {
+	return home;
     }
 }

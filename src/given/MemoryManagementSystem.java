@@ -80,15 +80,21 @@ public class MemoryManagementSystem {
 	String element = secondaryMemory[index];
 	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
     }
-    
-    private Node findNodeLRU(int index)
-    {
+
+    private Node findNodeLRU(int index) {
 	Node temp = memoryPointer[index];
-	if(temp == null) // this means that we dont have it loaded on the ram
-	    return null;
+	if (temp == null)// this means that we dont have it loaded on the ram
+	{
+	    Page page = mainMemory.getAndRemoveFirst().getData();
+	    moveToSecondaryMemory(page);
+
+	}
 	return temp;
     }
-    
+
+    private void moveToSecondaryMemory(Page page) {
+	secondaryMemory[page.getHome()] = page.read();
+    }
 
     @Override
     public String toString() {
