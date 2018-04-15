@@ -60,8 +60,8 @@ public class MemoryManagementSystem {
 
     public String readFIFO(int index) {
 	String element = secondaryMemory[index];
-	element = (String) mainMemoryAsQueue.enqueue(element, ramSize, index, false, ' ');
-	return element;
+	//element = (String) mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' ');
+	return null;
     }
 
     public void write(int index, char c) {
@@ -81,18 +81,19 @@ public class MemoryManagementSystem {
 
     public void writeFIFO(int index, char c) {
 	String element = secondaryMemory[index];
-	element = mainMemoryAsQueue.enqueue(element, ramSize, index, true, c);
+	//element = mainMemoryAsQueue.enqueue(element, ramSize, index, true, c);
     }
     
     private Page findPageFifo (int index) {
     	Page page;
     	if (mainMemoryAsQueue.getLocationInMainMemory(index)== -1) {
-    		mainMemoryAsQueue.enqueue(readFromSecondaryMemory(index), ramSize, index, false, ' ');
+    		page = new Page(readFromSecondaryMemory(index), index);
+    		mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' ');
     	}
     	
     	
     	
-    	return page;
+    	return null;
     }
 
     private Node findNodeLRU(int index) {
