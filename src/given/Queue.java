@@ -6,14 +6,22 @@ public class Queue {
 	
 	private int first;
 	private int last;
-	private String[] mainMemoryArray;
+	private Page[] mainMemoryArray;
 	private int[] locationInMainMemory;
 	
 	
+	public int getLocationInMainMemory(int index) {
+		return locationInMainMemory[index];
+	}
+
+	public void setLocationInMainMemory(int index, int value) {
+		locationInMainMemory[index] = value;
+	}
+
 	public Queue (int mainMemorySize,int secondaryMemorySize) {
 		first = 0;
 		last = 0;
-		mainMemoryArray = new String[mainMemorySize];
+		mainMemoryArray = new Page[mainMemorySize];
 		locationInMainMemory = new int[secondaryMemorySize];
 		for (int x : locationInMainMemory) {
 			locationInMainMemory[x] = -1;
@@ -26,14 +34,14 @@ public class Queue {
 	}
 	
     
-    public String enqueue(String element, int mainMemorySize, int index, boolean toWrite , char c) {
+    public Page enqueue(Page page, int mainMemorySize, int index, boolean toWrite , char c) {
     	if (isEmpty()) {
-    		mainMemoryArray[0] = element;
+    		mainMemoryArray[0] = page;
     	}
     	if (isFull(mainMemorySize)) {
-    		String elementToDequeue = mainMemoryArray[first];	
+    		Page elementToDequeue = mainMemoryArray[first];	
     		dequeue (elementToDequeue, index);
-    		mainMemoryArray[first] = element;
+    		mainMemoryArray[first] = page;
     		if (first == mainMemorySize) {
     			last =  mainMemorySize;
     			first = 0;
@@ -49,17 +57,17 @@ public class Queue {
     		locationInMainMemory[index] = last;
     	}
     	if (!isFull(mainMemorySize)) {
-    		mainMemoryArray[last + 1] = element;
+    		mainMemoryArray[last + 1] = page;
     	}
     	if (toWrite) {
-    		element = element + c;
+    		page.write(c);
     	}
     	
-    	return element;
+    	return page;
     		
     }
 
-    public String dequeue(String element, int index) {
+    public Page dequeue(Page element, int index) {
         if(isEmpty()) 
         	throw new NoSuchElementException();
         locationInMainMemory[first] = -1;
@@ -68,14 +76,9 @@ public class Queue {
     
     
     public boolean isFull (int mainMemorySize) {
-    	int counter = 0;
-    	for (int x : locationInMainMemory) {
-			if ( x != -1) {
-				counter = counter + 1;
-			}
-		}
-    	return (counter == mainMemorySize);
+    	return (last + 1 == first | first == 0 & last == mainMemorySize);
     }
+    
     //Returns the top element without removing it.
    
 

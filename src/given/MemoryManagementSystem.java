@@ -12,8 +12,9 @@ public class MemoryManagementSystem {
     public String[] secondaryMemory;
     private boolean useLRU;
     // YOU CAN ADD MORE FIELDS HERE
-    private int ram;
-    private int hardrive;
+    private int ramSize;
+    private int hardriveSize;
+    private int[] locationInMainMemory;
 
     // natai
     private Node[] memoryPointer;// this is size M
@@ -23,8 +24,8 @@ public class MemoryManagementSystem {
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
 	secondaryMemory = new String[secondaryMemorySize];
-	ram = mainMemorySize;
-	hardrive = secondaryMemorySize;
+	ramSize = mainMemorySize;
+	hardriveSize = secondaryMemorySize;
 	this.useLRU = useLRU;
 	if (useLRU) {
 	    MemoryManagementSystemLRU();
@@ -34,12 +35,12 @@ public class MemoryManagementSystem {
     }
 
     private void MemoryManagementSystemLRU() {
-	memoryPointer = new Node[hardrive];
-	mainMemory = new List(ram);// need to loud items 1 - n
+	memoryPointer = new Node[hardriveSize];
+	mainMemory = new List(ramSize);// need to loud items 1 - n
     }
 
     private void MemoryManagementSystemFifo() {
-	mainMemoryAsQueue = new Queue(ram, hardrive);
+	mainMemoryAsQueue = new Queue(ramSize, hardriveSize);
 
     }
 
@@ -59,7 +60,7 @@ public class MemoryManagementSystem {
 
     public String readFIFO(int index) {
 	String element = secondaryMemory[index];
-	element = (String) mainMemoryAsQueue.enqueue(element, ram, index, false, ' ');
+	element = (String) mainMemoryAsQueue.enqueue(element, ramSize, index, false, ' ');
 	return element;
     }
 
@@ -80,7 +81,18 @@ public class MemoryManagementSystem {
 
     public void writeFIFO(int index, char c) {
 	String element = secondaryMemory[index];
-	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
+	element = mainMemoryAsQueue.enqueue(element, ramSize, index, true, c);
+    }
+    
+    private Page findPageFifo (int index) {
+    	Page page;
+    	if (mainMemoryAsQueue.getLocationInMainMemory(index)== -1) {
+    		mainMemoryAsQueue.enqueue(readFromSecondaryMemory(index), ramSize, index, false, ' ');
+    	}
+    	
+    	
+    	
+    	return page;
     }
 
     private Node findNodeLRU(int index) {
