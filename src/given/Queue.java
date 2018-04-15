@@ -8,6 +8,7 @@ public class Queue {
 	private int last;
 	private String[] mainMemoryArray;
 	private int[] locationInMainMemory;
+	private int LocationFirstInSecondaryMemory;
 	
 	public Queue (int mainMemorySize,int secondaryMemorySize) {
 		first = 0;
@@ -25,9 +26,11 @@ public class Queue {
 	}
 	
     
-    public void enqueue(String element, int mainMemorySize) {
-    	if (isEmpty())
+    public void enqueue(String element, int mainMemorySize, int index) {
+    	if (isEmpty()) {
     		mainMemoryArray[0] = element;
+    		LocationFirstInSecondaryMemory = index;
+    	}
     	if (isFull(mainMemorySize)) {
     		String elementToDequeue = mainMemoryArray[first];
     		dequeue (elementToDequeue);
@@ -44,7 +47,7 @@ public class Queue {
     			last = last +1;
     			first = first + 1;
     		}
-
+    		locationInMainMemory[index] = last;
     	}
     	if (!isFull(mainMemorySize)) {
     		mainMemoryArray[last + 1] = element;
@@ -53,11 +56,11 @@ public class Queue {
     		
     }
 
-    public String dequeue(String element) {
+    public String dequeue(String element, int index) {
         if(isEmpty()) 
         	throw new NoSuchElementException();
-  
-      
+        for
+        locationInMainMemory[first] = -1;
         return element;
     } 
     
