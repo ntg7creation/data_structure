@@ -1,7 +1,5 @@
 package given;
 
-import javax.management.RuntimeErrorException;
-
 public class List {
 
     private Node root;

@@ -16,8 +16,8 @@ public class MemoryManagementSystem {
     private int hardrive;
 
     // natai
-    private Node[] memoryPointer;
-    private List mainMemory; // this needs to be size n
+    private Node[] memoryPointer;// this is size M
+    private List mainMemory; // this is size N* pagesize
     // bar
     private Queue mainMemoryAsQueue;
 
@@ -35,7 +35,7 @@ public class MemoryManagementSystem {
 
     private void MemoryManagementSystemLRU() {
 	memoryPointer = new Node[hardrive];
-	mainMemory = new List(ram);
+	mainMemory = new List(ram);// need to loud items 1 - n
     }
 
     private void MemoryManagementSystemFifo() {
@@ -73,6 +73,8 @@ public class MemoryManagementSystem {
     }
 
     public void writeLRU(int index, char c) {
+	Node temp = findNodeLRU(index);
+	
 
     }
 
@@ -81,19 +83,20 @@ public class MemoryManagementSystem {
 	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
     }
 
-    
     private Node findNodeLRU(int index) {
 	Node temp = memoryPointer[index];
 	if (temp == null)// this means that we dont have it loaded on the ram
 	{
-	    if (mainMemory.isFull()) { //remove LRU style 
+	    if (mainMemory.isFull()) { // remove LRU style
 		Page page = mainMemory.getAndRemoveFirst().getData();
+		memoryPointer[page.getHome()] = null;
 		moveToSecondaryMemory(page);
 	    }
-	    
-	    //creat new node (with a page) and add it to main memory
+
+	    // creat new node (with a page) and add it to main memory
 	    Page page = new Page(readFromSecondaryMemory(index), index);
 	    temp = new Node(page);
+	    mainMemory.addLast(temp);
 	    memoryPointer[index] = temp;
 
 	}
