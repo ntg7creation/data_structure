@@ -81,19 +81,32 @@ public class MemoryManagementSystem {
 	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
     }
 
+    
     private Node findNodeLRU(int index) {
 	Node temp = memoryPointer[index];
 	if (temp == null)// this means that we dont have it loaded on the ram
 	{
-	    Page page = mainMemory.getAndRemoveFirst().getData();
-	    moveToSecondaryMemory(page);
+	    if (mainMemory.isFull()) { //remove LRU style 
+		Page page = mainMemory.getAndRemoveFirst().getData();
+		moveToSecondaryMemory(page);
+	    }
+	    
+	    //creat new node (with a page) and add it to main memory
+	    Page page = new Page(readFromSecondaryMemory(index), index);
+	    temp = new Node(page);
+	    memoryPointer[index] = temp;
 
 	}
 	return temp;
     }
 
+    // the only 2 function the can talk with the secondaryMemory
     private void moveToSecondaryMemory(Page page) {
 	secondaryMemory[page.getHome()] = page.read();
+    }
+
+    private String readFromSecondaryMemory(int index) {
+	return secondaryMemory[index];
     }
 
     @Override

@@ -74,7 +74,7 @@ public class List {
 
     }
 
-    //LRU remove
+    // LRU remove
     public Node getAndRemoveFirst() {
 	Node temp = root;
 	removeNode(temp);
@@ -87,4 +87,7 @@ public class List {
 	return false;
     }
 
+    public Boolean isFull() {
+	return size >= max;
+    }
 }
