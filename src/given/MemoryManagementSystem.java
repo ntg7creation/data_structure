@@ -17,7 +17,7 @@ public class MemoryManagementSystem {
 
     // natai
     private Node[] memoryPointer;
-    private List mainMemory;
+    private List mainMemory; // this needs to be size n
     // bar
     private Queue mainMemoryAsQueue;
 
@@ -35,7 +35,7 @@ public class MemoryManagementSystem {
 
     private void MemoryManagementSystemLRU() {
 	memoryPointer = new Node[hardrive];
-	mainMemory = new List();
+	mainMemory = new List(ram);
     }
 
     private void MemoryManagementSystemFifo() {
@@ -80,6 +80,15 @@ public class MemoryManagementSystem {
 	String element = secondaryMemory[index];
 	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
     }
+    
+    private Node findNodeLRU(int index)
+    {
+	Node temp = memoryPointer[index];
+	if(temp == null) // this means that we dont have it loaded on the ram
+	    return null;
+	return temp;
+    }
+    
 
     @Override
     public String toString() {

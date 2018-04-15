@@ -1,19 +1,26 @@
 package given;
 
+import javax.management.RuntimeErrorException;
+
 public class List {
 
     private Node root;
     private Node last;
+    private int size;
+    private int max;
 
-    public List() {
-
+    public List(int size) {
+	size = 0;
+	max = size;
     }
 
-    
     // node mast be from this tree
     public Boolean removeNode(Node node) {
 	if (isEmpty() || node == null)
 	    return false;
+
+	size--;
+
 	if (node.getPre() == null) {
 
 	    root = node.getNext();
@@ -41,7 +48,10 @@ public class List {
 	return true;
     }
 
-    public void addLast(Node node) {
+    public Boolean addLast(Node node) {
+	if (size >= max)
+	    return false;
+
 	if (isEmpty()) {
 	    root = node;
 	    last = node;
@@ -51,25 +61,27 @@ public class List {
 	    last.setNext(node);
 	    last = node; // last = last.getNext(); same thing
 	}
+	size++;
+	return true;
     }
 
     // node mast be from this tree
     public void moveToLast(Node node) {
 
 	if (removeNode(node))
-	    addLast(node);
+	    if (!addLast(node))
+		throw new RuntimeException(); // we shold never get here
 
     }
 
-    public Node getAndRemoveFirst()
-    {
+    public Node getAndRemoveFirst() {
 	Node temp = root;
 	removeNode(temp);
 	return temp;
     }
-    
+
     public Boolean isEmpty() {
-	if (root == null)
+	if (size == 0)
 	    return true;
 	return false;
     }
