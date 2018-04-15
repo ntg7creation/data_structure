@@ -88,12 +88,20 @@ public class MemoryManagementSystem {
     	Page page;
     	if (mainMemoryAsQueue.getLocationInMainMemory(index)== -1) {
     		page = new Page(readFromSecondaryMemory(index), index);
-    		mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' ');
+    		if (mainMemoryAsQueue.isFull(ramSize)) {
+    			moveToSecondaryMemory(mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' '));
+    		}
+    		else {
+    			mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' ');
+    		}
+    	}
+    	else {
+    		page = null;
     	}
     	
     	
     	
-    	return null;
+    	return page;
     }
 
     private Node findNodeLRU(int index) {
