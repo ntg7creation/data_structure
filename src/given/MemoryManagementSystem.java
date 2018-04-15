@@ -8,7 +8,6 @@ package given;
  */
 import java.util.Arrays;
 
-
 public class MemoryManagementSystem {
     public String[] secondaryMemory;
     private boolean useLRU;
@@ -18,8 +17,6 @@ public class MemoryManagementSystem {
     private Node[] memoryPointer;
     private List mainMemory;
     private Queue mainMemoryAsQueue;
-    
-    
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
 	secondaryMemory = new String[secondaryMemorySize];
@@ -29,7 +26,7 @@ public class MemoryManagementSystem {
 	if (useLRU) {
 	    MemoryManagementSystemLRU();
 	} else {
-		MemoryManagementSystemFifo();
+	    MemoryManagementSystemFifo();
 	}
     }
 
@@ -37,37 +34,34 @@ public class MemoryManagementSystem {
 	memoryPointer = new Node[hardrive];
 	mainMemory = new List();
     }
-    
+
     private void MemoryManagementSystemFifo() {
-    	mainMemoryAsQueue = new Queue ( ram ,hardrive );
-    	
+	mainMemoryAsQueue = new Queue(ram, hardrive);
+
     }
 
-    
+    public String read(int index) {
+	String element = secondaryMemory[index];
+	if (useLRU) {
+
+	} else {
+	    element = (String) mainMemoryAsQueue.enqueue(element, ram, index, false, ' ');
+	}
+	return element;
+    }
+
+    public void write(int index, char c) {
+	String element = secondaryMemory[index];
+	if (useLRU) {
+
+	} else {
+	    element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
+	}
+    }
 
     @Override
     public String toString() {
 	return "secondaryMemory=" + Arrays.toString(secondaryMemory);
     }
 
-    public String read(int index) {
-    	String element = secondaryMemory[index];
-    	if (useLRU) {
-    		
-    	}
-    	else {
-    		element = (String) mainMemoryAsQueue.enqueue(element, ram, index , false , ' ');
-    	}
-	return element;
-    }
-
-    public void write(int index, char c) {
-    	String element = secondaryMemory[index];
-    	if (useLRU) {
-    		
-    	}
-    	else {
-    		element = mainMemoryAsQueue.enqueue(element, ram, index , true , c);
-    	}
-    }
 }
