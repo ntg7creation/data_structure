@@ -14,8 +14,11 @@ public class MemoryManagementSystem {
     // YOU CAN ADD MORE FIELDS HERE
     private int ram;
     private int hardrive;
+
+    // natai
     private Node[] memoryPointer;
     private List mainMemory;
+    // bar
     private Queue mainMemoryAsQueue;
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
@@ -41,22 +44,41 @@ public class MemoryManagementSystem {
     }
 
     public String read(int index) {
-	String element = secondaryMemory[index];
-	if (useLRU) {
 
+	if (useLRU) {
+	    return readLRU(index);
 	} else {
-	    element = (String) mainMemoryAsQueue.enqueue(element, ram, index, false, ' ');
+	    return readFIFO(index);
 	}
+    }
+
+    public String readLRU(int index) {
+
+	return null;
+    }
+
+    public String readFIFO(int index) {
+	String element = secondaryMemory[index];
+	element = (String) mainMemoryAsQueue.enqueue(element, ram, index, false, ' ');
 	return element;
     }
 
     public void write(int index, char c) {
-	String element = secondaryMemory[index];
-	if (useLRU) {
 
+	if (useLRU) {
+	    writeLRU(index, c);
 	} else {
-	    element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
+	    writeFIFO(index, c);
 	}
+    }
+
+    public void writeLRU(int index, char c) {
+
+    }
+
+    public void writeFIFO(int index, char c) {
+	String element = secondaryMemory[index];
+	element = mainMemoryAsQueue.enqueue(element, ram, index, true, c);
     }
 
     @Override
