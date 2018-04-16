@@ -101,7 +101,7 @@ public class MemoryManagementSystem {
 				mainMemoryAsQueue.enqueue(page, ramSize, index, false, ' ');
 			}
 		} else {
-			page = mainMemoryAsQueue.getPageInmainMemoryArray(index);
+			page = mainMemoryAsQueue.getPageInmainMemoryArray(mainMemoryAsQueue.getLocationInMainMemory(index));
 		}
 
 		return page;
