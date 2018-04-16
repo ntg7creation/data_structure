@@ -3,86 +3,79 @@ package given;
 import java.util.NoSuchElementException;
 
 public class Queue {
-	
+
 	private int first;
 	private int last;
-	private Page[] mainMemoryArray;
-	private int[] locationInMainMemory;
-	
-	
+	private Page[] mainMemoryArray;// size n
+	private int[] locationInMainMemory;// size m
+	private int currentsize;
+
 	public int getLocationInMainMemory(int index) {
 		return locationInMainMemory[index];
 	}
 
-	public void setLocationInMainMemory(int index, int value) {
-		locationInMainMemory[index] = value;
-	}
-
-	public Queue (int mainMemorySize,int secondaryMemorySize) {
+	public Queue(int mainMemorySize, int secondaryMemorySize) {
 		first = 0;
 		last = 0;
+		currentsize = 0;
 		mainMemoryArray = new Page[mainMemorySize];
 		locationInMainMemory = new int[secondaryMemorySize];
-		for (int x : locationInMainMemory) {
-			locationInMainMemory[x] = -1;
+		for (int i = 0; i < secondaryMemorySize; i = i + 1) {
+			locationInMainMemory[i] = -1;
 		}
 	}
-	
-	public boolean isEmpty() { 
-		return first == last;
-		
-	}
-	
-	public Page getPageInmainMemoryArray(int index) {
-		return mainMemoryArray[index];
-	}
-    
-    public Page enqueue(Page page, int mainMemorySize, int index, boolean toWrite , char c) {
-    	if (isEmpty()) {
-    		mainMemoryArray[0] = page;
-    	}
-    	if (isFull(mainMemorySize)) {
-    		Page elementToDequeue = mainMemoryArray[first];	
-    		dequeue (elementToDequeue, index);
-    		mainMemoryArray[first] = page;
-    		if (first == mainMemorySize) {
-    			last =  mainMemorySize;
-    			first = 0;
-    		}
-    		if (last == mainMemorySize) {
-    			last = 0;
-    			first = first + 1;
-    		}
-    		else {
-    			last = last +1;
-    			first = first + 1;
-    		}
-    		locationInMainMemory[index] = last;
-    	}
-    	if (!isFull(mainMemorySize)) {
-    		mainMemoryArray[last + 1] = page;
-    	}
-    	if (toWrite) {
-    		page.write(c);
-    	}
-    	
-    	return page;
-    		
-    }
 
-    public Page dequeue(Page element, int index) {
-        if(isEmpty()) 
-        	throw new NoSuchElementException();
-        locationInMainMemory[first] = -1;
-        return element;
-    } 
-    
-    
-    public boolean isFull (int mainMemorySize) {
-    	return (last + 1 == first | first == 0 & last == mainMemorySize);
-    }
-    
-    //Returns the top element without removing it.
-   
+	public boolean isEmpty() {
+		return (currentsize == 0);
+
+	}
+
+	public Page getPageInmainMemoryArray(int index) {
+		int realIndex = getLocationInMainMemory(index);
+		return mainMemoryArray[realIndex];
+	}
+
+	// index is place in secandry memory
+	public Page enqueue(Page page) {
+		if (isEmpty()) {
+			mainMemoryArray[last] = page;
+			locationInMainMemory[page.getHome()] = last;
+			currentsize++;
+			return null;
+		}
+
+		if (!isFull() & !isEmpty()) {
+			last = (last + 1) % mainMemoryArray.length;
+			mainMemoryArray[last] = page;
+			locationInMainMemory[page.getHome()] = last;
+			currentsize++;
+			return null;
+		}
+
+		Page elementToDequeue = mainMemoryArray[first];
+		dequeue(elementToDequeue);
+
+		first = (first + 1) % mainMemoryArray.length;
+		last = (last + 1) % mainMemoryArray.length;
+		mainMemoryArray[last] = page;
+		currentsize++;
+		locationInMainMemory[page.getHome()] = last;
+
+		return elementToDequeue;
+
+	}
+
+	public Page dequeue(Page element) {
+		if (isEmpty())
+			throw new NoSuchElementException();
+		locationInMainMemory[element.getHome()] = -1;
+		currentsize--;
+		return element;
+	}
+
+	public boolean isFull() {
+
+		return (currentsize == mainMemoryArray.length);
+	}
 
 }

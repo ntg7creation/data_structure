@@ -47,9 +47,9 @@ public class MemoryManagementSystem {
 
 	private void MemoryManagementSystemFifo() {
 		mainMemoryAsQueue = new Queue(ramSize, hardriveSize);
-		for (int i = 0; i <= ramSize; i++) {
+		for (int i = 0; i < ramSize; i++) {
 			findPageFifo(i); // load 1 - n and add them to list // the function findnode also load it up to
-							// the list
+								// the list
 		}
 	}
 
@@ -62,12 +62,12 @@ public class MemoryManagementSystem {
 		}
 	}
 
-	public String readLRU(int index) {
+	private String readLRU(int index) {
 		Node temp = findNodeLRU(index);
 		return temp.getData().read();
 	}
 
-	public String readFIFO(int index) {
+	private String readFIFO(int index) {
 		Page page = findPageFifo(index);
 		return page.read();
 	}
@@ -81,12 +81,12 @@ public class MemoryManagementSystem {
 		}
 	}
 
-	public void writeLRU(int index, char c) {
+	private void writeLRU(int index, char c) {
 		Node temp = findNodeLRU(index);
 		temp.getData().write(c);
 	}
 
-	public void writeFIFO(int index, char c) {
+	private void writeFIFO(int index, char c) {
 		Page page = findPageFifo(index);
 		page.write(c);
 	}
@@ -95,13 +95,17 @@ public class MemoryManagementSystem {
 		Page page;
 		if (mainMemoryAsQueue.getLocationInMainMemory(index) == -1) {
 			page = new Page(readFromSecondaryMemory(index), index);
-			if (mainMemoryAsQueue.isFull(ramSize)) {
-				moveToSecondaryMemory(mainMemoryAsQueue.enqueue(page, ramSize, index, false, ' '));
+			if (mainMemoryAsQueue.isFull()) {
+				Page temp = mainMemoryAsQueue.enqueue(page);
+				if (temp == null) {
+					int hsfsjd = 4;
+				} else
+					moveToSecondaryMemory(temp);
 			} else {
-				mainMemoryAsQueue.enqueue(page, ramSize, index, false, ' ');
+				mainMemoryAsQueue.enqueue(page);
 			}
 		} else {
-			page = mainMemoryAsQueue.getPageInmainMemoryArray(mainMemoryAsQueue.getLocationInMainMemory(index));
+			page = mainMemoryAsQueue.getPageInmainMemoryArray(index);
 		}
 
 		return page;
