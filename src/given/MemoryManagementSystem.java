@@ -14,7 +14,7 @@ public class MemoryManagementSystem {
     // YOU CAN ADD MORE FIELDS HERE
     private int ramSize;
     private int hardriveSize;
-    private int[] locationInMainMemory;
+    //private int[] locationInMainMemory;
 
     // natai
     private Node[] memoryPointer;// this is size M
@@ -59,9 +59,8 @@ public class MemoryManagementSystem {
     }
 
     public String readFIFO(int index) {
-	String element = secondaryMemory[index];
-	//element = (String) mainMemoryAsQueue.enqueue(page , ramSize, index, false, ' ');
-	return null;
+    	Page page = findPageFifo(index);
+	return page.read();
     }
 
     public void write(int index, char c) {
@@ -80,8 +79,8 @@ public class MemoryManagementSystem {
     }
 
     public void writeFIFO(int index, char c) {
-	String element = secondaryMemory[index];
-	//element = mainMemoryAsQueue.enqueue(element, ramSize, index, true, c);
+	Page page = findPageFifo(index);
+	page.write(c);
     }
     
     private Page findPageFifo (int index) {
@@ -96,7 +95,7 @@ public class MemoryManagementSystem {
     		}
     	}
     	else {
-    		page = null;
+    		page = mainMemoryAsQueue.getPageInmainMemoryArray(index);
     	}
     	
     	

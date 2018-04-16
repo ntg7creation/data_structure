@@ -33,6 +33,9 @@ public class Queue {
 		
 	}
 	
+	public Page getPageInmainMemoryArray(int index) {
+		return mainMemoryArray[index];
+	}
     
     public Page enqueue(Page page, int mainMemorySize, int index, boolean toWrite , char c) {
     	if (isEmpty()) {
