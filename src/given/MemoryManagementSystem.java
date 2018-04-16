@@ -37,6 +37,10 @@ public class MemoryManagementSystem {
     private void MemoryManagementSystemLRU() {
 	memoryPointer = new Node[hardriveSize];
 	mainMemory = new List(ramSize);// need to loud items 1 - n
+	for(int i = 0; i< ramSize; i++)
+	{
+	    mainMemory.addLast(findNodeLRU(i)); // load 1 - n and add them to list
+	}
     }
 
     private void MemoryManagementSystemFifo() {
@@ -54,8 +58,8 @@ public class MemoryManagementSystem {
     }
 
     public String readLRU(int index) {
-
-	return null;
+	Node temp = findNodeLRU(index);
+	return temp.getData().read();
     }
 
     public String readFIFO(int index) {
@@ -74,8 +78,7 @@ public class MemoryManagementSystem {
 
     public void writeLRU(int index, char c) {
 	Node temp = findNodeLRU(index);
-	
-
+	temp.getData().write(c);
     }
 
     public void writeFIFO(int index, char c) {
@@ -120,6 +123,7 @@ public class MemoryManagementSystem {
 	    memoryPointer[index] = temp;
 
 	}
+	mainMemory.moveToLast(temp);
 	return temp;
     }
 
