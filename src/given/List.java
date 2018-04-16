@@ -8,7 +8,7 @@ public class List {
     private int max;
 
     public List(int size) {
-	size = 0;
+	this.size = 0;
 	max = size;
     }
 

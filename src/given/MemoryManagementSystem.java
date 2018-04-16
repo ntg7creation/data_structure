@@ -24,6 +24,8 @@ public class MemoryManagementSystem {
 
     public MemoryManagementSystem(int mainMemorySize, int secondaryMemorySize, boolean useLRU) {
 	secondaryMemory = new String[secondaryMemorySize];
+	for(int i = 0;i<secondaryMemorySize ;i++)
+	    secondaryMemory[i] = "";
 	ramSize = mainMemorySize;
 	hardriveSize = secondaryMemorySize;
 	this.useLRU = useLRU;
@@ -37,9 +39,9 @@ public class MemoryManagementSystem {
     private void MemoryManagementSystemLRU() {
 	memoryPointer = new Node[hardriveSize];
 	mainMemory = new List(ramSize);// need to loud items 1 - n
-	for(int i = 0; i< ramSize; i++)
+ 	for(int i = 0; i<= ramSize; i++)
 	{
-	    mainMemory.addLast(findNodeLRU(i)); // load 1 - n and add them to list
+	   findNodeLRU(i); // load 1 - n and add them to list // the function findnode also load it up to the list
 	}
     }
 
