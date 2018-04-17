@@ -7,8 +7,8 @@ public class Queue {
 	private int first;
 	private int last;
 	private Page[] mainMemoryArray;// size n
-	private int[] locationInMainMemory;// size m
-	private int currentsize;
+	private int[] locationInMainMemory;// size m , at first all "-1", when we add a page, from index in the secondery memory, to main memory we save the in the same index in this array the index we put the page in the main memory array.
+	private int currentsize;//counter to help us know if the main memory if empty or full. 
 
 	public int getLocationInMainMemory(int index) {
 		return locationInMainMemory[index];
@@ -29,13 +29,16 @@ public class Queue {
 		return (currentsize == 0);
 
 	}
-
+// index is from secondary memory
 	public Page getPageInmainMemoryArray(int index) {
 		int realIndex = getLocationInMainMemory(index);
 		return mainMemoryArray[realIndex];
 	}
 
-	// index is place in secandry memory
+	// index is from secondary memory
+	// we use "last" and "first" to say who is the first one we placed in the main memory array, and the same with the last.
+	// because it's a queue with a fixed size we first full the array and only when it's full we will use the dequeue function.
+	// we replace the first page with the new one, witch now will be the last. and the first will be the next one we placed in the array after the one we deleted.
 	public Page enqueue(Page page) {
 		if (isEmpty()) {
 			mainMemoryArray[last] = page;
@@ -68,7 +71,7 @@ public class Queue {
 	public Page dequeue(Page element) {
 		if (isEmpty())
 			throw new NoSuchElementException();
-		locationInMainMemory[element.getHome()] = -1;
+		locationInMainMemory[element.getHome()] = -1;// when we dequeue page we update it's status in the array that tell us where each page is in the main array to "-1" = not there. 
 		currentsize--;
 		return element;
 	}

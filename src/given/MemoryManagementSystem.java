@@ -48,8 +48,7 @@ public class MemoryManagementSystem {
 	private void MemoryManagementSystemFifo() {
 		mainMemoryAsQueue = new Queue(ramSize, hardriveSize);
 		for (int i = 0; i < ramSize; i++) {
-			findPageFifo(i); // load 1 - n and add them to list // the function findnode also load it up to
-								// the list
+			findPageFifo(i); // load 1 - n and add them to list 
 		}
 	}
 
@@ -66,7 +65,7 @@ public class MemoryManagementSystem {
 		Node temp = findNodeLRU(index);
 		return temp.getData().read();
 	}
-
+	// use findPageFifo to check where the page we want (main memory of secondary memory) and returns it.
 	private String readFIFO(int index) {
 		Page page = findPageFifo(index);
 		return page.read();
@@ -85,7 +84,7 @@ public class MemoryManagementSystem {
 		Node temp = findNodeLRU(index);
 		temp.getData().write(c);
 	}
-
+// use findPageFifo to check where the page we want (main memory of secondary memory) and adds char to it.
 	private void writeFIFO(int index, char c) {
 		Page page = findPageFifo(index);
 		page.write(c);
@@ -93,18 +92,15 @@ public class MemoryManagementSystem {
 
 	private Page findPageFifo(int index) {
 		Page page;
-		if (mainMemoryAsQueue.getLocationInMainMemory(index) == -1) {
-			page = new Page(readFromSecondaryMemory(index), index);
-			if (mainMemoryAsQueue.isFull()) {
-				Page temp = mainMemoryAsQueue.enqueue(page);
-				if (temp == null) {
-					int hsfsjd = 4;
-				} else
-					moveToSecondaryMemory(temp);
-			} else {
-				mainMemoryAsQueue.enqueue(page);
+		if (mainMemoryAsQueue.getLocationInMainMemory(index) == -1) { // if not already in main memory
+			page = new Page(readFromSecondaryMemory(index), index); // create new page and save its info
+			if (mainMemoryAsQueue.isFull()) {// if full
+				Page temp = mainMemoryAsQueue.enqueue(page);// enqueue returns us the page we dequeue
+					moveToSecondaryMemory(temp); // returns the updated page to his place in secondary memory
+			} else {// if not full
+				mainMemoryAsQueue.enqueue(page);// if main memory still got place to add, we only add the page
 			}
-		} else {
+		} else { // if in the main memory 
 			page = mainMemoryAsQueue.getPageInmainMemoryArray(index);
 		}
 
