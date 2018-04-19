@@ -1,7 +1,13 @@
 package given;
 
+/**
+ * 
+ * @author natai & 208768150
+ * @author bar & 205817521
+ */
 public class Node {
 
+	//basic node the contain a page 
     private Node next;
     private Node pre;
     private Page data;

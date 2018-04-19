@@ -2,6 +2,11 @@ package given;
 
 import java.util.NoSuchElementException;
 
+/**
+ * 
+ * @author natai & 208768150
+ * @author bar & 205817521
+ */
 public class Queue {
 
 	private int first;

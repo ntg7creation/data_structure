@@ -1,5 +1,10 @@
 package given;
 
+/**
+ * 
+ * @author natai & 208768150
+ * @author bar & 205817521
+ */
 public class List {
 
     private Node root;
@@ -12,13 +17,15 @@ public class List {
 	max = size;
     }
 
-    // node mast be from this tree
+    // node mast be from this tree 
+    //this function removes a node from a tree
     public Boolean removeNode(Node node) {
+    	//make sure the list is not empty
 	if (isEmpty() || node == null)
 	    return false;
 
 	size--;
-
+	// if the node is the root
 	if (node.getPre() == null) {
 
 	    root = node.getNext();
@@ -30,6 +37,7 @@ public class List {
 	    return true;
 	}
 
+	//if the node is the last 
 	if (node.getNext() == null) {
 	    last = node.getPre();
 	    last.setNext(null);
@@ -38,6 +46,7 @@ public class List {
 	    return true;
 	}
 
+	//if the node is not the root or the last
 	node.getNext().setPre(node.getPre());
 	node.getPre().setNext(node.getNext());
 
@@ -46,6 +55,7 @@ public class List {
 	return true;
     }
 
+    // addes a node to the last place in the tree
     public Boolean addLast(Node node) {
 	if (size >= max)
 	    return false;
@@ -65,7 +75,7 @@ public class List {
 
     // node mast be from this tree
     public void moveToLast(Node node) {
-
+    	// we remove the node from the tree then place it in the end
 	if (removeNode(node))
 	    if (!addLast(node))
 		throw new RuntimeException(); // we shold never get here
