@@ -5,21 +5,21 @@ package assignment4;
  * @author natai & 208768150
  * @author bar & 205817521
  */
-public class Node {
+public class Node<T> {
 
 	//basic node the contain a String 
     private Node next;
     private Node pre;
-    private String data;
-    public Node(String info) {
+    private T data;
+    public Node(T info) {
 	data = info;
 	next = null;
 	pre = null;
     }
-    public String getData() {
+    public T getData() {
         return data;
     }
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
     public Node getNext() {

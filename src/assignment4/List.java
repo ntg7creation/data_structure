@@ -5,20 +5,18 @@ package assignment4;
  * @author natai & 208768150
  * @author bar & 205817521
  */
-public class List {
+public class List<T> {
 
-	private Node root;
-	private Node last;
+	private Node<T> root;
+	private Node<T> last;
 	private int size;
-	private int max;
-
 	public List() {
 		this.size = 0;
 	}
 
-	public Node replace(Node n, List list) {
-		Node pre = n.getPre();
-		Node next = n.getNext();
+	public Node<T> replace(Node<T> n, List<T> list) {
+		Node<T> pre = n.getPre();
+		Node<T> next = n.getNext();
 		list.getLast().setNext(next);
 		if (pre == null) {
 			root = list.getFirst();
@@ -28,31 +26,31 @@ public class List {
 		if (next == null) {
 			last = list.getLast();
 		}
-		return List.removeNode(n);
+		return removeNode(n);
 	}
 
-	static public Node removeNode(Node n)
+	 public Node<T> removeNode(Node<T> n)
 	{
 		n.setNext(null);
 		n.setPre(null);
 		return n;
 	}
 	
-	public Node getLast() {
+	public Node<T> getLast() {
 		return last;
 	}
 
-	public Node getFirst() {
+	public Node<T> getFirst() {
 		return root;
 	}
 
-	public void addLast(String str) {
-		Node newN = new Node(str);
+	public void addLast(T str) {
+		Node<T> newN = new Node<T>(str);
 		addLast(newN);
 	}
 
-	// addes a node to the last place in the tree
-	public void addLast(Node node) {
+	// addes a Node<T> to the last place in the tree
+	public void addLast(Node<T> node) {
 
 		if (isEmpty()) {
 			root = node;
