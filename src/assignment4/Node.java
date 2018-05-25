@@ -1,4 +1,4 @@
-package given;
+package assignment4;
 
 /**
  * 
@@ -7,18 +7,19 @@ package given;
  */
 public class Node {
 
-	//basic node the contain a page 
+	//basic node the contain a String 
     private Node next;
     private Node pre;
-    private Page data;
-    public Node(Page info) {
-	
+    private String data;
+    public Node(String info) {
 	data = info;
+	next = null;
+	pre = null;
     }
-    public Page getData() {
+    public String getData() {
         return data;
     }
-    public void setData(Page data) {
+    public void setData(String data) {
         this.data = data;
     }
     public Node getNext() {
