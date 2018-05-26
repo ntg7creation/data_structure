@@ -3,7 +3,7 @@ package assignment4;
 public class BTreeNode {
 	
 	int t;
-	int keys[];
+	key keys[];
 	boolean isLeaf;
 	BTreeNode children[];
 	int n; // number of keys
@@ -14,7 +14,7 @@ public class BTreeNode {
 		this.t = Integer.parseInt(tVal);
 		children = new BTreeNode[2*t];
 		this.isLeaf = isLeaf;
-		keys = new int[2*t -1];
+		keys = new key[2*t -1];
 		n = 0;
 		this.tVal = tVal;
 		
@@ -23,10 +23,10 @@ public class BTreeNode {
 	
 	public BTreeNode search (int k) {
 		int i = 0;
-		while ((i < this.n) & (k > this.keys[i])) {
+		while ((i < this.n) & (k > this.keys[i].k)) {
 			i = i+1;
 		}
-		if(i <= this.n & k == this.keys[i]) {
+		if(i <= this.n & k == this.keys[i].k) {
 			return this;
 		}
 		if (this.isLeaf)
@@ -41,7 +41,7 @@ public class BTreeNode {
 		BTreeNode z = new BTreeNode(tVal,y.isLeaf );
 		z.n = t-1;
 		for (int j = 0; j < t-1 ; j++) {
-			z.keys[j]= y.keys[j+t];
+			z.keys[j].k= y.keys[j+t].k;
 		}
 		if (!y.isLeaf) {
 			for (int j = 0; j < t; j++) {
@@ -55,12 +55,12 @@ public class BTreeNode {
 		}
 		x.children[i-1] = z;
 		for (int j = x.n-1 ; j <= i; j-- ) {
-			x.keys[j+1] = x.keys[j];
+			x.keys[j+1].k = x.keys[j].k;
 		}
-		x.keys[i] = y.keys[t];
+		x.keys[i].k = y.keys[t].k;
 		x.n = x.n + 1;
 		
 		}
+	
 		
-
 }
