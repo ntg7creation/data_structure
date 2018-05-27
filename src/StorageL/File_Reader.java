@@ -36,7 +36,7 @@ public class File_Reader {
 	}
 
 	public static void main(String arg[]) {
-		for (String string : readFile("files\\friends.txt")) {
+		for (String string : readFile("files\\messages.txt")) {
 			System.out.println(string);
 		}
 

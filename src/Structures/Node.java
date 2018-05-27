@@ -8,8 +8,8 @@ package Structures;
 public class Node<T> {
 
 	//basic node the contain a String 
-    private Node next;
-    private Node pre;
+    private Node<T> next;
+    private Node<T> pre;
     private T data;
     public Node(T info) {
 	data = info;
@@ -22,16 +22,16 @@ public class Node<T> {
     public void setData(T data) {
         this.data = data;
     }
-    public Node getNext() {
+    public Node<T> getNext() {
         return next;
     }
-    public Node getPre() {
+    public Node<T> getPre() {
         return pre;
     }
-    public void setNext(Node next) {
+    public void setNext(Node<T> next) {
         this.next = next;
     }
-    public void setPre(Node pre) {
+    public void setPre(Node<T> pre) {
         this.pre = pre;
     }
 

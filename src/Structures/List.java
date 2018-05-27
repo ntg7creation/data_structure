@@ -44,8 +44,8 @@ public class List<T> {
 		return root;
 	}
 
-	public void addLast(T str) {
-		Node<T> newN = new Node<T>(str);
+	public void addLast(T data) {
+		Node<T> newN = new Node<T>(data);
 		addLast(newN);
 	}
 
