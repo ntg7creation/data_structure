@@ -23,8 +23,10 @@ public class BTree {
 	}
 	
 	public void insertAllFriends(String path) {
+		int counter = 0;
 		for (String x : File_Reader.readFile(path)) {
-			key newkey = new key(x);
+			counter = counter + 1;
+			key newkey = new key(x ,counter);
 			insert(newkey);
 		}
 	
@@ -33,13 +35,13 @@ public class BTree {
 	
 	public void insert (key newKey) {
 		BTreeNode r = root;
-		if (root.n == 2*t-1) {
+		if (root != null && root.n == 2*t-1) {
 			BTreeNode s = new BTreeNode(tVal, false);
 			s.n = 0;
 			root = s;
 			s.children[0]= r;
 			s.splitChild(s,r,1);
-			//r = s;??????
+			r = s;
 		}
 		insertNonFull(r, newKey);	
 		
@@ -48,27 +50,36 @@ public class BTree {
 	
 	
 	public void insertNonFull(BTreeNode r,key newKey) {
-		int i = r.n;
-		if (r.isLeaf) {
-			while (i >= 1 & newKey.k < r.keys[i-1].k) {
-				r.keys[i] = r.keys[i-1];
-				i = i-1;
-			}
-			r.keys[i].k = newKey.k;
-			r.n = r.n+1;
+		if (root == null) {
+			r = new BTreeNode(tVal, true);
+			r.keys[0] = newKey;
+			r.n = 1;
+			root = r;
+			
+			
 		}
 		else {
-			while ( i >= 1 & newKey.k < r.keys[i-1].k) {
-				i = i-1;
-			}
-			i = i + 1;
-			if ((r.children[i]).n == 2*t-1) {
-				r.splitChild(r, r.children[i], i);
-				if (newKey.k > r.keys[i-1].k) {
-					i = i+1;
+			int i = r.n;
+			if (r.isLeaf) {
+				while (i >= 1 && newKey.k < r.keys[i-1].k) {
+					r.keys[i] = r.keys[i-1];
+					i = i-1;
 				}
+				r.keys[i] = newKey;
+				r.n = (r.n) + 1;
 			}
-			insertNonFull(r.children[i], newKey);
+			else {
+				while ( i >= 1 && newKey.k < r.keys[i-1].k) {
+					i = i-1;
+				}
+				if ((r.children[i]).n == (2*t)-1) {
+					r.splitChild(r, r.children[i], i);
+					if (newKey.k > r.keys[i-1].k) {
+						i = i+1;
+					}
+				}
+				insertNonFull(r.children[i], newKey);
+			}
 		}
 	}
 	
@@ -76,5 +87,23 @@ public class BTree {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public String toString(BTreeNode n){
+		String friendsList = "";
+		if (n==null)
+		    return "empty tree";
+		if (n.isLeaf) {
+			friendsList = friendsList + " # " + n.toString();
+		}
+		else {
+			friendsList = friendsList + " # " + n.toString();
+			for (BTreeNode currChild : n.children) {
+				if (currChild.n != 0) {
+					currChild.toString();
+				}
+					
+			}
+		} 
+		return friendsList;
+	}
+	
 }
