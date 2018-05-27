@@ -1,5 +1,7 @@
 package assignment4;
 
+import StorageL.File_Reader;
+
 public class BTree {
 	
 	BTreeNode root;
@@ -20,7 +22,16 @@ public class BTree {
 		return null;
 	}
 	
-	public void insert (String friends) {
+	public void insertAllFriends(String path) {
+		for (String x : File_Reader.readFile(path)) {
+			key newkey = new key(x);
+			insert(newkey);
+		}
+	
+		
+	}
+	
+	public void insert (key newKey) {
 		BTreeNode r = root;
 		if (root.n == 2*t-1) {
 			BTreeNode s = new BTreeNode(tVal, false);
@@ -30,14 +41,14 @@ public class BTree {
 			s.splitChild(s,r,1);
 			//r = s;??????
 		}
-		insertNonFull(r, friends);	
+		insertNonFull(r, newKey);	
 		
 	}
 
 	
-	public void insertNonFull(BTreeNode r,String friends) {
+	
+	public void insertNonFull(BTreeNode r,key newKey) {
 		int i = r.n;
-		key newKey = new key (friends);
 		if (r.isLeaf) {
 			while (i >= 1 & newKey.k < r.keys[i-1].k) {
 				r.keys[i] = r.keys[i-1];
@@ -57,7 +68,7 @@ public class BTree {
 					i = i+1;
 				}
 			}
-			insertNonFull(r.children[i], friends);
+			insertNonFull(r.children[i], newKey);
 		}
 	}
 	
