@@ -3,9 +3,9 @@ package assignment4;
 import java.util.Iterator;
 
 import StorageL.File_Reader;
-import Structures.BTree;
-import Structures.LinkedListIterator;
-import Structures.List;
+import Structures.BTree.BTree;
+import Structures.List.LinkedListIterator;
+import Structures.List.List;
 import components.Message;
 
 public class Messages implements Iterable<Message> {
