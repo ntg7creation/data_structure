@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import Structures.BTree;
 import assignment4.Messages;
+import assignment4.Structures.BTree.BTree;
 
 public class Runner {
 

@@ -1,4 +1,4 @@
-package StorageL;
+package assignment4.StorageL;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -26,17 +26,18 @@ public class File_Reader {
 				txt[count] = line;
 				// System.out.println(line);
 			}
+			inputStream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("File not Found");
 			return null;
 		}
-
+		
 		return txt;
 	}
 
 	public static void main(String arg[]) {
-		for (String string : readFile("files\\friends.txt")) {
+		for (String string : readFile("files\\messages.txt")) {
 			System.out.println(string);
 		}
 

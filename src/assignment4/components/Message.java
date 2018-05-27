@@ -1,4 +1,4 @@
-package components;
+package assignment4.components;
 
 public class Message {
 
@@ -15,6 +15,7 @@ public class Message {
 		Recipient = txt[1];
 		for (int i = 2; i < txt.length; i++)
 			content = content + " " + txt[i];
+		
 	}
 
 	/**
@@ -36,5 +37,12 @@ public class Message {
 	 */
 	public String getContent() {
 		return content;
+	}
+	
+	@Override
+	public String toString()
+	{
+		String output = Sender +"\n"+ Recipient + "\n" + content;
+		return output;
 	}
 }
