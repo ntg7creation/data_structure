@@ -55,17 +55,15 @@ public class Messages implements Iterable<Message> {
 	public Iterator<Message> iterator() {
 		return new LinkedListIterator<Message>(allMessages.getFirst());
 	}
-	
-	
-	public static void main(String arg[]) {
-		Messages box =	new Messages();
-		//Iterator it = box.iterator();
-		for (Message message : box) {
-			System.out.println(message.toString());
-			System.out.println();
-			System.out.println();
-		}
-	}
 
+	public static void main(String arg[]) {
+		Messages box = new Messages();
+		// Iterator it = box.iterator();
+//		for (Message message : box) {
+//			System.out.println(message.toString());
+//			System.out.println();
+//			System.out.println();
+//		}
+	}
 
 }

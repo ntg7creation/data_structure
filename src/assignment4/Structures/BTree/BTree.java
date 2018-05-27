@@ -13,8 +13,7 @@ public class BTree {
 		t = Integer.parseInt(tVal);
 		root = null;
 		this.tVal = tVal;
-	}
-	
+	}	
 
 	public BTreeNode search (int k) {
 		if (root!=null)
@@ -44,8 +43,6 @@ public class BTree {
 		insertNonFull(r, newKey);	
 		
 	}
-
-	
 	
 	public void insertNonFull(BTreeNode r,key newKey) {
 		int i = r.n;
