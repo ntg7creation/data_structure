@@ -5,13 +5,13 @@ package assignment4.Structures.List;
  * @author natai & 208768150
  * @author bar & 205817521
  */
-public class Node<T> {
+public class MyNode<T> {
 
 	//basic node the contain a String 
-    private Node<T> next;
-    private Node<T> pre;
+    private MyNode<T> next;
+    private MyNode<T> pre;
     private T data;
-    public Node(T info) {
+    public MyNode(T info) {
 	data = info;
 	next = null;
 	pre = null;
@@ -22,16 +22,16 @@ public class Node<T> {
     public void setData(T data) {
         this.data = data;
     }
-    public Node<T> getNext() {
+    public MyNode<T> getNext() {
         return next;
     }
-    public Node<T> getPre() {
+    public MyNode<T> getPre() {
         return pre;
     }
-    public void setNext(Node<T> next) {
+    public void setNext(MyNode<T> next) {
         this.next = next;
     }
-    public void setPre(Node<T> pre) {
+    public void setPre(MyNode<T> pre) {
         this.pre = pre;
     }
 

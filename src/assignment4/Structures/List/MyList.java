@@ -5,18 +5,18 @@ package assignment4.Structures.List;
  * @author natai & 208768150
  * @author bar & 205817521
  */
-public class List<T> {
+public class MyList<T> {
 
-	private Node<T> root;
-	private Node<T> last;
+	private MyNode<T> root;
+	private MyNode<T> last;
 	private int size;
-	public List() {
+	public MyList() {
 		this.size = 0;
 	}
 
-	public Node<T> replace(Node<T> n, List<T> list) {
-		Node<T> pre = n.getPre();
-		Node<T> next = n.getNext();
+	public MyNode<T> replace(MyNode<T> n, MyList<T> list) {
+		MyNode<T> pre = n.getPre();
+		MyNode<T> next = n.getNext();
 		list.getLast().setNext(next);
 		if (pre == null) {
 			root = list.getFirst();
@@ -29,28 +29,28 @@ public class List<T> {
 		return removeNode(n);
 	}
 
-	 public Node<T> removeNode(Node<T> n)
+	 public MyNode<T> removeNode(MyNode<T> n)
 	{
 		n.setNext(null);
 		n.setPre(null);
 		return n;
 	}
 	
-	public Node<T> getLast() {
+	public MyNode<T> getLast() {
 		return last;
 	}
 
-	public Node<T> getFirst() {
+	public MyNode<T> getFirst() {
 		return root;
 	}
 
 	public void addLast(T data) {
-		Node<T> newN = new Node<T>(data);
+		MyNode<T> newN = new MyNode<T>(data);
 		addLast(newN);
 	}
 
 	// addes a Node<T> to the last place in the tree
-	public void addLast(Node<T> node) {
+	public void addLast(MyNode<T> node) {
 
 		if (isEmpty()) {
 			root = node;

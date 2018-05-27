@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedListIterator<T> implements Iterator<T> {
-	private Node<T> current ;
+	private MyNode<T> current ;
 
-	public LinkedListIterator (Node<T> first) {
+	public LinkedListIterator (MyNode<T> first) {
 		current = first ;
 	}
 

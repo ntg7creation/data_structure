@@ -5,16 +5,16 @@ import java.util.Iterator;
 import assignment4.StorageL.File_Reader;
 import assignment4.Structures.BTree.BTree;
 import assignment4.Structures.List.LinkedListIterator;
-import assignment4.Structures.List.List;
+import assignment4.Structures.List.MyList;
 import assignment4.components.Message;
 
 public class Messages implements Iterable<Message> {
 
 	final String path = "files\\messages.txt";
-	List<Message> allMessages;
+	MyList<Message> allMessages;
 
 	public Messages() {
-		allMessages = new List<Message>();
+		allMessages = new MyList<Message>();
 		String[] txt = File_Reader.readFile(path);
 		int messageStart = 0;
 		int messageEnd = 0;
