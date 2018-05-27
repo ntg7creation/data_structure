@@ -26,12 +26,13 @@ public class File_Reader {
 				txt[count] = line;
 				// System.out.println(line);
 			}
+			inputStream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("File not Found");
 			return null;
 		}
-
+		
 		return txt;
 	}
 
