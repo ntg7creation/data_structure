@@ -1,4 +1,4 @@
-package components;
+package assignment4.components;
 
 public class Message {
 

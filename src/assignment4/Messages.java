@@ -2,11 +2,11 @@ package assignment4;
 
 import java.util.Iterator;
 
-import StorageL.File_Reader;
-import Structures.BTree.BTree;
-import Structures.List.LinkedListIterator;
-import Structures.List.List;
-import components.Message;
+import assignment4.StorageL.File_Reader;
+import assignment4.Structures.BTree.BTree;
+import assignment4.Structures.List.LinkedListIterator;
+import assignment4.Structures.List.List;
+import assignment4.components.Message;
 
 public class Messages implements Iterable<Message> {
 
