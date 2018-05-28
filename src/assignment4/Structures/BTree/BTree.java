@@ -13,7 +13,8 @@ public class BTree {
 		t = Integer.parseInt(tVal);
 		root = null;
 		this.tVal = tVal;
-	}	
+	}
+	
 
 	public BTreeNode search (int k) {
 		if (root!=null)
@@ -22,8 +23,10 @@ public class BTree {
 	}
 	
 	public void insertAllFriends(String path) {
+		int counter = 0;
 		for (String x : File_Reader.readFile(path)) {
-			key newkey = new key(x);
+			counter = counter + 1;
+			key newkey = new key(x ,counter);
 			insert(newkey);
 		}
 	
@@ -31,47 +34,51 @@ public class BTree {
 	}
 	
 	public void insert (key newKey) {
-		BTreeNode r = root;
-		if (root.n == 2*t-1) {
-			BTreeNode s = new BTreeNode(tVal, false);
-			s.n = 0;
-			root = s;
-			s.children[0]= r;
-			s.splitChild(s,r,1);
-			//r = s;??????
-		}
-		insertNonFull(r, newKey);	
-		
-	}
+		if (root == null) {
+			root = new BTreeNode(tVal, true);
+			root.keys[0] = newKey;
+			root.n = 1;
 	
-	public void insertNonFull(BTreeNode r,key newKey) {
-		int i = r.n;
-		if (r.isLeaf) {
-			while (i >= 1 & newKey.k < r.keys[i-1].k) {
-				r.keys[i] = r.keys[i-1];
-				i = i-1;
-			}
-			r.keys[i].k = newKey.k;
-			r.n = r.n+1;
 		}
 		else {
-			while ( i >= 1 & newKey.k < r.keys[i-1].k) {
-				i = i-1;
+			if(root.n == 2*t-1) {
+			BTreeNode s = new BTreeNode(tVal, false);
+			s.n = 0;
+			s.children[0]= root;
+			s.splitChild(s,root,1);
+			root = s;
 			}
-			i = i + 1;
-			if ((r.children[i]).n == 2*t-1) {
-				r.splitChild(r, r.children[i], i);
-				if (newKey.k > r.keys[i-1].k) {
-					i = i+1;
-				}
-			}
-			insertNonFull(r.children[i], newKey);
+			root.insertNonFull(newKey);
 		}
 	}
+
+	
+	
 	
 	public void createFullTree(String string) {
 		// TODO Auto-generated method stub
 		
 	}
+	public void print(BTreeNode n) 
+	{
+		for(int i = 0; i < n.n; i++) {
+			System.out.print(n.keys[i].k );//this part prints root node
+			if (i !=  n.n -1)
+				System.out.print(",");
+		}
 
+		if(!n.isLeaf)	{
+			System.out.print("#");
+			for(int j = 0; j <= n.n  ; j++){				
+				if(n.children[j] != null ){		
+				
+					if (j != 0 & j !=  n.n -1)
+						System.out.print("|");
+					print(n.children[j]);  
+				
+				}
+			}
+		}
+
+	}
 }

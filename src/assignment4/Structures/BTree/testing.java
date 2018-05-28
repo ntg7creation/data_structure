@@ -1,14 +1,16 @@
-package assignment4;
+package assignment4.Structures.BTree;
 
 public class testing {
 
 	public static void main(String[] args) {
-		String t = "7";
+		String t = "2";
 		
 		
 		
 		BTree BT = new BTree(t);
 		BT.insertAllFriends("files\\friends.txt");
-		System.out.println(BT.root.toString());
+		
+		BT.print(BT.root);;
+		
 	}
 }
