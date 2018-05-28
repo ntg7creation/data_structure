@@ -3,7 +3,7 @@ package assignment4.Structures.BTree;
 public class testing {
 
 	public static void main(String[] args) {
-		String t = "2";
+		String t = "4";
 		
 		
 		

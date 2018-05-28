@@ -62,18 +62,14 @@ public class BTree {
 	public void print(BTreeNode n) 
 	{
 		for(int i = 0; i < n.n; i++) {
-			System.out.print(n.keys[i].k );//this part prints root node
-			if (i !=  n.n -1)
-				System.out.print(",");
+			System.out.print(n.keys[i].friends + " " );
+			
 		}
 
 		if(!n.isLeaf)	{
-			System.out.print("#");
 			for(int j = 0; j <= n.n  ; j++){				
 				if(n.children[j] != null ){		
-				
-					if (j != 0 & j !=  n.n -1)
-						System.out.print("|");
+						System.out.println();
 					print(n.children[j]);  
 				
 				}
