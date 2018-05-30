@@ -2,8 +2,6 @@ package assignment4.Structures.HashTable;
 
 import java.util.Iterator;
 
-import assignment4.Structures.List.LinkedListIterator;
-
 public class HashTable  implements Iterable<HashListElements>{
 
 	private HashList[] Slots;

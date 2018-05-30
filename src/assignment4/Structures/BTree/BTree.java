@@ -8,7 +8,7 @@ public class BTree {
 	int t;
 	String tVal;
 	
-	
+	//hi
 	public BTree(String tVal) {
 		t = Integer.parseInt(tVal);
 		root = null;
@@ -51,8 +51,6 @@ public class BTree {
 			root.insertNonFull(newKey);
 		}
 	}
-
-	
 	
 	
 	public void createFullTree(String string) {
