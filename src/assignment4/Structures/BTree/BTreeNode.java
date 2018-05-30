@@ -3,12 +3,12 @@ package assignment4.Structures.BTree;
 
 public class BTreeNode {
 	
-	public int t;
-	public key keys[];
-	public boolean isLeaf;
-	public BTreeNode children[];
-	public int n; // number of keys
-	String tVal;
+	private int t;
+	private key keys[];
+	private boolean isLeaf;
+	private BTreeNode children[];
+	private int n; // number of keys
+	private String tVal;
 	
 		
 	public BTreeNode (String tVal, boolean isLeaf) {
@@ -87,6 +87,73 @@ public class BTreeNode {
 			}
 			children[i].insertNonFull(newKey);
 		}
+	}
+
+
+	public int getT() {
+		return t;
+	}
+
+
+	public void setT(int t) {
+		this.t = t;
+	}
+
+
+	public key[] getKeys() {
+		return keys;
+	}
+
+	public key getKey(int index) {
+		return keys[index];
+	}
+
+	public void setKeys(key newKey, int index) {
+		this.keys[index] = newKey;
+	}
+
+
+	public boolean isLeaf() {
+		return isLeaf;
+	}
+
+
+	public void setLeaf(boolean isLeaf) {
+		this.isLeaf = isLeaf;
+	}
+
+
+	public BTreeNode[] getChildren() {
+		return children;
+	}
+	
+	
+	public BTreeNode getChild(int index) {
+		return children[index];
+	}
+
+	public void setChildren (BTreeNode NewChild, int index) {
+		this.children[index] = NewChild;
+	}
+
+
+	public int getN() {
+		return n;
+	}
+
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+
+	public String gettVal() {
+		return tVal;
+	}
+
+
+	public void settVal(String tVal) {
+		this.tVal = tVal;
 	}
 
 
