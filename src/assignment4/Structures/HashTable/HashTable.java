@@ -49,6 +49,7 @@ public class HashTable  implements Iterable<HashListElements>{
 				System.out.println("error in hashfunction");
 			Slots[keyValue].addData(elements.getKey());
 		}
+		Slots = newTable;
 	}
 
 	public static void main(String arg[]) {
