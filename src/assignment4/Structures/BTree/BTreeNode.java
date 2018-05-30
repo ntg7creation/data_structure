@@ -128,9 +128,11 @@ public class BTreeNode {
 	}
 	
 	
+	
 	public BTreeNode getChild(int index) {
 		return children[index];
 	}
+	
 
 	public void setChildren (BTreeNode NewChild, int index) {
 		this.children[index] = NewChild;

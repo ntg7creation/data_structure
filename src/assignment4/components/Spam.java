@@ -17,7 +17,6 @@ public class Spam {
 	}
 
 	
-	
 	public String getWord() {
 		return word;
 	}

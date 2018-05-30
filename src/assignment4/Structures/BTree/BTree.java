@@ -8,14 +8,14 @@ public class BTree {
 	private int t;
 	private String tVal;
 	
-	//hi
+	
 	public BTree(String tVal) {
 		t = Integer.parseInt(tVal);
 		root = null;
 		this.tVal = tVal;
 	}
-	//hh
-
+	
+	
 	public BTreeNode search (int k) {
 		if (root!=null)
 			return root.search(k);
