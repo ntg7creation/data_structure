@@ -14,7 +14,7 @@ public class BTree {
 		root = null;
 		this.tVal = tVal;
 	}
-	
+	//hh
 
 	public BTreeNode search (int k) {
 		if (root!=null)
