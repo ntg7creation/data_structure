@@ -10,6 +10,7 @@ public class MyList<T> {
 	private MyNode<T> root;
 	private MyNode<T> last;
 	private int size;
+
 	public MyList() {
 		this.size = 0;
 	}
@@ -29,13 +30,20 @@ public class MyList<T> {
 		return removeNode(n);
 	}
 
-	 public MyNode<T> removeNode(MyNode<T> n)
-	{
+	public MyNode<T> removeNode(MyNode<T> n) {
 		n.setNext(null);
 		n.setPre(null);
 		return n;
 	}
-	
+
+	public MyNode<T> removeNode(T element) {
+		MyNode<T> temp = root;
+		while (temp != null)
+			if (temp.getData().equals(element))
+				return removeNode(temp);
+		return null;
+	}
+
 	public MyNode<T> getLast() {
 		return last;
 	}

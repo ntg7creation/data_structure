@@ -3,11 +3,11 @@ package assignment4.Structures.BTree;
 
 public class BTreeNode {
 	
-	int t;
-	key keys[];
-	boolean isLeaf;
-	BTreeNode children[];
-	int n; // number of keys
+	public int t;
+	public key keys[];
+	public boolean isLeaf;
+	public BTreeNode children[];
+	public int n; // number of keys
 	String tVal;
 	
 		

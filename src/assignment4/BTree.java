@@ -1,6 +1,8 @@
 package assignment4;
 
 import assignment4.StorageL.File_Reader;
+import assignment4.Structures.BTree.BTreeNode;
+import assignment4.Structures.BTree.key;
 
 public class BTree {
 	

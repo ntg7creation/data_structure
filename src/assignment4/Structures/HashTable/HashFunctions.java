@@ -1,11 +1,11 @@
 package assignment4.Structures.HashTable;
 
-public class HashFunction {
+public class HashFunctions {
 
-	static public int getHash(int hashNumber ,int size, String key) {
+	static public int getHash(int hashNumber, int size, String key) {
 		switch (hashNumber) {
 		case 1:
-			return hash1(size,key);
+			return hash1(size, key);
 		default:
 			System.out.println("hash dous not exsist");
 			break;
@@ -19,7 +19,8 @@ public class HashFunction {
 			char c = key.charAt(i);
 			keyValue += c; // each char have an asky code value
 		}
-		return keyValue % size;
+
+		return (keyValue * keyValue) % size;
 	}
 
 }
