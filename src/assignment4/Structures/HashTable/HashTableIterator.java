@@ -7,8 +7,8 @@ import assignment4.Structures.List.MyNode;
 
 public class HashTableIterator implements Iterator<HashListElements> {
 
-	//this class needs heavy testing 
-	
+	// this class needs heavy testing
+
 	private HashList[] allItems;
 	private MyNode<HashListElements> currentData;
 	private int currentSlot;
@@ -32,8 +32,8 @@ public class HashTableIterator implements Iterator<HashListElements> {
 		// System.out.println("iterator was called");
 		if (!hasNext())
 			throw new NoSuchElementException();
-		// if(allItems[current].getAllElements().)
-		//
+
+		
 		HashListElements next = currentData.getData();
 		currentData = currentData.getNext();
 		if (currentData == null)

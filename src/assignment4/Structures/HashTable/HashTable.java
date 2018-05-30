@@ -1,6 +1,10 @@
 package assignment4.Structures.HashTable;
 
-public class HashTable {
+import java.util.Iterator;
+
+import assignment4.Structures.List.LinkedListIterator;
+
+public class HashTable  implements Iterable<HashListElements>{
 
 	private HashList[] Slots;
 
@@ -38,11 +42,22 @@ public class HashTable {
 
 	public void ReHash() {
 		int nextSize = 2 * Slots.length;
-		
+		HashList[] newTable = new HashList[nextSize];
+		for (HashListElements elements : this) {
+			int keyValue = HashFunctions.hash1(nextSize, elements.getKey());
+			if (keyValue >= nextSize)
+				System.out.println("error in hashfunction");
+			Slots[keyValue].addData(elements.getKey());
+		}
 	}
 
 	public static void main(String arg[]) {
 		new HashTable("hi this is a test to split a messge", 16);
+	}
+
+	@Override
+	public Iterator<HashListElements> iterator() {
+		return new HashTableIterator(Slots);
 	}
 
 }
