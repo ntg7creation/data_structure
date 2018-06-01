@@ -19,8 +19,7 @@ public class BTreeNode {
 		n = 0;
 		this.tVal = tVal;
 		
-	}
-	
+	}	
 	
 	public BTreeNode search (int k) {
 		int i = 0;
