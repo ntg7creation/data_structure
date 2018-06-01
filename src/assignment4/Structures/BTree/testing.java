@@ -9,7 +9,7 @@ public class testing {
 		BTree BT = new BTree(t);
 		BT.insertAllFriends("files\\friends.txt");
 		
-		BT.print(BT.getRoot());;
-		
+		BT.printBFS(BT.getRoot());
+		BT.print(BT.getRoot());
 	}
 }
