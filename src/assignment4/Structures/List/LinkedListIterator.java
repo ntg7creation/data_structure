@@ -30,4 +30,9 @@ public class LinkedListIterator<T> implements Iterator<T> {
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
+	
+	public static void main(String arg[]) {
+		
+		
+	}
 }

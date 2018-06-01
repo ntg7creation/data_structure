@@ -6,11 +6,10 @@ public class testing {
 		String t = "4";
 		
 		
-		
 		BTree BT = new BTree(t);
 		BT.insertAllFriends("files\\friends.txt");
 		
-		BT.print(BT.root);;
+		BT.print(BT.getRoot());;
 		
 	}
 }

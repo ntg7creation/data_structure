@@ -4,11 +4,10 @@ import assignment4.StorageL.File_Reader;
 
 public class BTree {
 
-	BTreeNode root;
-	int t;
-	String tVal;
+	private BTreeNode root;
+	private int t;
+	private String tVal;
 
-	// hi
 	public BTree(String tVal) {
 		t = Integer.parseInt(tVal);
 		root = null;
@@ -34,18 +33,29 @@ public class BTree {
 	public void insert(key newKey) {
 		if (root == null) {
 			root = new BTreeNode(tVal, true);
-			root.keys[0] = newKey;
-			root.n = 1;
+			root.getKeys()[0] = newKey;
+			root.setN(1);
 
 		} else {
-			if (root.n == 2 * t - 1) {
+			if (root.getN()== 2 * t - 1) {
 				BTreeNode s = new BTreeNode(tVal, false);
-				s.n = 0;
-				s.children[0] = root;
+				s.setN(0);
+				s.getChildren()[0] = root;
 				s.splitChild(s, root, 1);
 				root = s;
+				root.setKeys(newKey, 0);
+				root.setN(1);
+
+			} else {
+				if (root.getN() == 2 * t - 1) {
+					BTreeNode s = new BTreeNode(tVal, false);
+					s.setN(0);
+					s.setChildren(root, 0);
+					s.splitChild(s, root, 1);
+					root = s;
+				}
+				root.insertNonFull(newKey);
 			}
-			root.insertNonFull(newKey);
 		}
 	}
 
@@ -53,23 +63,47 @@ public class BTree {
 		// TODO Auto-generated method stub
 	}
 
+	public void print1(BTreeNode n) {
+		for (int i = 0; i < n.getN(); i++) {
+			System.out.print(n.getKeys()[i].friends + " ");
+		}
+	}
+
+	public BTreeNode getRoot() {
+		return root;
+	}
+
+	public int getTInt() {
+		return t;
+	}
+
+	public String getTString() {
+		return tVal;
+	}
+
 	public void print(BTreeNode n) {
-		for (int i = 0; i < n.n; i++) {
-			System.out.print(n.keys[i].friends + " ");
+		for (int i = 0; i < n.getN(); i++) {
+			System.out.print(n.getKey(i).friends + " ");
 
 		}
 
-		if (!n.isLeaf) {
-			for (int j = 0; j <= n.n; j++) {
-				if (n.children[j] != null) {
+		if (!n.isLeaf()) {
+			for (int j = 0; j <= n.getN(); j++) {
+				if (n.getChildren()[j] != null) {
 					System.out.println();
-					print(n.children[j]);
-
+					print(n.getChildren()[j]);
 				}
 			}
+			if (!n.isLeaf()) {
+				for (int j = 0; j <= n.getN(); j++) {
+					if (n.getChild(j) != null) {
+						System.out.println();
+						print(n.getChild(j));
+					}
+				}
+			}
+
 		}
 
 	}
-	
-	
 }
