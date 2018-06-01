@@ -15,7 +15,6 @@ public class MyList<T> {
 		this.size = 0;
 	}
 
-	public MyList<T> remove
 	
 	public MyNode<T> replace(MyNode<T> n, MyList<T> list) {
 		MyNode<T> pre = n.getPre();
