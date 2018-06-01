@@ -1,6 +1,7 @@
 package assignment4.Structures.BTree;
 
 import assignment4.StorageL.File_Reader;
+import assignment4.Structures.Queue.QueueAsLinkedList;
 
 public class BTree {
 	
@@ -71,8 +72,23 @@ public class BTree {
 	}
 	
 	
-	public void print(BTreeNode n) 
-	{
+	public String BFS () {
+		String BFS = "jj";
+
+		if (root == null) {
+			return BFS;
+		}
+		else {
+			return root.BFS(BFS);
+		}
+	
+	}
+	
+	public void printBFS(BTreeNode n) {
+		System.out.println(BFS());
+	}
+
+	public void print(BTreeNode n) { // in order
 		for(int i = 0; i < n.getN(); i++) {
 			System.out.print(n.getKey(i).friends + " " );
 			

@@ -1,5 +1,6 @@
 package assignment4.Structures.BTree;
 
+import assignment4.Structures.Queue.QueueAsLinkedList;
 
 public class BTreeNode {
 	
@@ -158,7 +159,33 @@ public class BTreeNode {
 		this.tVal = tVal;
 	}
 
+	
+	public String BFS (String BFS) {
+		QueueAsLinkedList<Object> qNodes = new QueueAsLinkedList<Object>(); 
+		qNodes.enqueue(this); 
+		System.out.println(BFS);
 
+		while (!qNodes.isEmpty()) {
+			for(int i = 0; i < this.getN()  ; i++){	
+				BFS = BFS + this.getKey(i).friends;
+				if (i < this.getN() -1) {
+					BFS = BFS + ",";
+				}
+			}
+			qNodes.dequeue();
+		} 
 
+		System.out.println(BFS);
 
+		if(!this.isLeaf())	{
+			BFS = BFS + "#";
+			for(int i = 0; i < this.getN()  ; i++){				
+				if(this.getChild(i) != null ){	
+					this.getChild(i).BFS(BFS);
+					BFS = BFS + "|";
+				}
+			}
+		}
+		return BFS;
+	}
 }
