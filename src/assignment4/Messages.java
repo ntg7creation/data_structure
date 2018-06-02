@@ -48,7 +48,7 @@ public class Messages implements Iterable<Message> {
 
 	public void generateMessages(String string) {
 		// TODO Auto-generated method stub
-
+		System.out.println(string);
 	}
 
 	@Override

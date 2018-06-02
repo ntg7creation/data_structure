@@ -20,7 +20,7 @@ public class HashFunctions {
 			keyValue += c; // each char have an asky code value
 		}
 
-		return (keyValue * keyValue) % size;
+		return keyValue % size;
 	}
 
 }
