@@ -31,8 +31,5 @@ public class LinkedListIterator<T> implements Iterator<T> {
 		throw new UnsupportedOperationException();
 	}
 	
-	public static void main(String arg[]) {
-		
-		
-	}
+	
 }

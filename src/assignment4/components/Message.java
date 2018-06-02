@@ -54,9 +54,7 @@ public class Message {
 	public HashTable getMywords() {
 		return mywords;
 	}
-	
 
-	
 	/**
 	 * @return the msgNumber
 	 */

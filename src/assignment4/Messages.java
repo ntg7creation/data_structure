@@ -79,10 +79,5 @@ public class Messages implements Iterable<Message> {
 		return new LinkedListIterator<Message>(allMessages.getFirst());
 	}
 
-	public static void main(String arg[]) {
-		Messages box = new Messages();
-		String test = "abcd" + 65;
-		System.out.println(test);
-	}
-
+	
 }

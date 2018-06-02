@@ -70,12 +70,6 @@ public class HashTable implements Iterable<HashListElements> {
 		return new HashTableIterator(Slots);
 	}
 
-	public static void main(String arg[]) {
-		String msg = "hi this is a test to split a messge";
-		HashTable table = new HashTable(msg, 16);
-		for (HashListElements hashListElements : table) {
-			System.out.println(hashListElements.getKey() + " was inserted " + hashListElements.getCount() + " times");
-		}
-	}
+
 
 }

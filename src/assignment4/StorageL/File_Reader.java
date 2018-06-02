@@ -34,11 +34,5 @@ public class File_Reader {
 		return txt;
 	}
 
-	public static void main(String arg[]) {
-		for (String string : readFile("friends.txt")) {
-			System.out.println(string);
-		}
-
-	}
 
 }
