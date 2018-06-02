@@ -24,8 +24,10 @@ public class testing {
 		BT.createFullTree("files\\friends.txt");
 		
 		BT.printBFS();
-		//BT.print();
+		//BT.print(); 
+		
 	
+		System.out.println(BT.areFreinds("McCartney" , "Lennon"));
 
 		
 	}
