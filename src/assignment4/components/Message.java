@@ -16,8 +16,8 @@ public class Message {
 		if (txt.length < 3)
 			System.out.println("invalid messge");
 
-		Sender = txt[0];
-		Recipient = txt[1];
+		Sender = txt[0].substring(5);
+		Recipient = txt[1].substring(3);
 		for (int i = 2; i < txt.length; i++)
 			content = content + " " + txt[i];
 

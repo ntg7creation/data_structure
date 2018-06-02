@@ -41,21 +41,24 @@ public class Messages implements Iterable<Message> {
 		Spams trash = new Spams(path);
 		String output = "";
 		for (Message message : allMessages) {
-			// if(!btree.areFrinds(message.getRecipient(),message.getRecipient()))
-			for (Spam spamword : trash) {
-				HashTable table = message.getMywords();
-				HashListElements msgword = table.Search(spamword.getWord());
-				if (msgword != null ) {
-					double wordprs = 100*(double) msgword.getCount() / (double) message.getMywords().getElementsCount();
-					if(wordprs > spamword.getPrs())
-					output += "," + message.getMsgNumber();
-					// break;
+			if (!btree.areFreinds(message.getRecipient(), message.getSender()))
+				for (Spam spamword : trash) {
+					HashTable table = message.getMywords();
+					HashListElements msgword = table.Search(spamword.getWord());
+					if (msgword != null) {
+						double wordprs = 100 * (double) msgword.getCount()
+								/ (double) message.getMywords().getElementsCount();
+						if (wordprs > spamword.getPrs())
+							output += "," + message.getMsgNumber();
+						break;
+					}
 				}
-			}
 
 		}
-		System.out.println(output);
-		return null;
+		if (output.length() > 0)
+			output = output.substring(1);
+		// System.out.println(output);
+		return output;
 	}
 
 	public void generateMessages(String path) {
