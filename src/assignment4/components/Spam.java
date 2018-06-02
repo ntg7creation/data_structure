@@ -6,6 +6,7 @@ public class Spam {
 	private String word;
 	private int prs;
 	
+	
 	public Spam (String newWord) {
 		for (int i = 0; i < newWord.length(); i++) {
 			if (newWord.charAt(i) == ' ') {

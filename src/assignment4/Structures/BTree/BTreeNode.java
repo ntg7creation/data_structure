@@ -14,7 +14,7 @@ public class BTreeNode {
 	int hight;
 	BTreeNode father;
 	
-		
+	//Run time : O(1)	
 	public BTreeNode (String tVal, boolean isLeaf) {
 		this.t = Integer.parseInt(tVal);
 		children = new BTreeNode[2*t];
@@ -24,7 +24,7 @@ public class BTreeNode {
 		this.tVal = tVal;
 		
 	}	
-	
+	//Run time : O(th)
 	public BTreeNode search (String k) {
 		int i = 0;
 		while ((i < this.n) & (k.compareTo(this.keys[i]) > 0)) {
@@ -42,7 +42,7 @@ public class BTreeNode {
 	}
 	
 	
-	
+	//Run time : O(t)
 	public void splitChild (BTreeNode x, BTreeNode y, int i) {
 		BTreeNode z = new BTreeNode(tVal,y.isLeaf );
 		z.n = t-1;
@@ -67,10 +67,10 @@ public class BTreeNode {
 		x.n = x.n + 1;
 		
 		}
-	
+	//Run time : O(th)
 	public void insertNonFull(String newKey) {
-		int i = n;
-		if (isLeaf) {
+		int i = n; // n = number of keys in this node
+		if (isLeaf) { // if this is a leaf we look for the place for this key in this node.
 
 			while (i >= 1 && newKey.compareTo(keys[i-1]) < 0) {
 				keys[i] = keys[i-1];
@@ -81,7 +81,7 @@ public class BTreeNode {
 			n = n + 1;
 		}
 		
-		else {
+		else { // if it's not a leaf we look for the rigth child to try to insert the key in him.
 			while ( i >= 1 && newKey.compareTo(keys[i-1]) < 0) {
 				i = i-1;
 			}
@@ -95,94 +95,98 @@ public class BTreeNode {
 		}
 	}
 
-
+	//Run time : O(1)
 	public int getT() {
 		return t;
 	}
 
-
+	//Run time : O(1)
 	public void setT(int t) {
 		this.t = t;
 	}
 
-
+	//Run time : O(1)
 	public String[] getKeys() {
 		return keys;
 	}
-
+	//Run time : O(1)
 	public String getKey(int index) {
 		return keys[index];
 	}
-
+	//Run time : O(1)
 	public void setKeys(String newKey, int index) {
 		this.keys[index] = newKey;
 	}
 
-
+	//Run time : O(1)
 	public boolean isLeaf() {
 		return isLeaf;
 	}
 
-
+	//Run time : O(1)
 	public void setLeaf(boolean isLeaf) {
 		this.isLeaf = isLeaf;
 	}
 
-
+	//Run time : O(1)
 	public BTreeNode[] getChildren() {
 		return children;
 	}
 	
 	
-	
+	//Run time : O(1)
 	public BTreeNode getChild(int index) {
 		return children[index];
 	}
 	
-
+	//Run time : O(1)
 	public void setChildren (BTreeNode NewChild, int index) {
 		this.children[index] = NewChild;
 	}
 
-
+	//Run time : O(1)
 	public int getN() {
 		return n;
 	}
 
-
+	//Run time : O(1)
 	public void setN(int n) {
 		this.n = n;
 	}
 
-
+	//Run time : O(1)
 	public String gettVal() {
 		return tVal;
 	}
 
-
+	//Run time : O(1)
 	public void settVal(String tVal) {
 		this.tVal = tVal;
 	}
-
+	//Run time : O(1)
 	public void setPre (BTreeNode n) {
 		pre = n;
 	}
-	
+	//Run time : O(1)
 	public void setNext (BTreeNode n) {
 		next = n;
 	}
-	
+	//Run time : O(1)
 	public BTreeNode getPre () {
 		return pre;
 	}
-	
+	//Run time : O(1)
 	public BTreeNode getNext () {
 		return next;
 	}
 	
 	
 	
-	
+	//Run time : O(n)
+	// we use queue for the BFS 
+	// we go over all the nodes, at first we enqueue the root
+	// every time we dequeue node we enqueue all of his children. 
+	// every node that we dequeue, added to BFS string with the sign according to the previous node we dequeued.
 	public String BFS (String BFS) {
 		Queue qNodes = new Queue(); 
 		BTreeNode curr =this; 
@@ -219,22 +223,22 @@ public class BTreeNode {
 	}
 	
 	
-	public void print() { // in order
-		int i;
-		String output = "";
-		for( i = 0 ; i < this.getN(); i++) {
-			if (!isLeaf) {
-				this.getChild(i).print();
-			}
-			output = output + " " +this.getKey(i);
-		}
-		
-		if(!this.isLeaf())	{			
-			this.getChild(i).print();		
-		}
-		
-		System.out.println(output);
-	}
+//	public void print() { // in order
+//		int i;
+//		String output = "";
+//		for( i = 0 ; i < this.getN(); i++) {
+//			if (!isLeaf) {
+//				this.getChild(i).print();
+//			}
+//			output = output + " " +this.getKey(i);
+//		}
+//		
+//		if(!this.isLeaf())	{			
+//			this.getChild(i).print();		
+//		}
+//		
+//		System.out.println(output);
+//	}
 
 	
 }

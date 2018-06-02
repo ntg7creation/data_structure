@@ -1,7 +1,5 @@
 package assignment4.Structures.BTree;
 
-
-
 public class Queue{
 
 
@@ -16,22 +14,22 @@ public class Queue{
 		
 		public BTreeNode dequeue() {
 			BTreeNode tmp = first;
-			if (last != first & !isEmpty()) {
+			if (last != first & !isEmpty()) { // there is more then one node in the queue, we delete the first node from the queue
 			first.getNext().setPre(null);
 			first = first.getNext();
 			size--;
 			}
-			else {
+			else { // there is only one node in the queue, when we delete it the queue should be empty
 				size = 0;
 				first = null;
 				last = null;
 			}
-			return tmp;
+			return tmp; 
 				
 		}
 		
 		public void enqueue (BTreeNode n) {
-			if (isEmpty()) {
+			if (isEmpty()) { //add the first node
 				first = n;	
 				last = n;
 				n.setPre(null);
@@ -39,13 +37,13 @@ public class Queue{
 			}
 
 			else {
-				n.setNext(null); // not needed
+				n.setNext(null); // add to the end of the queue
 				n.setPre(last);
 				last.setNext(n);
-				last = last.getNext(); // last = last.getNext(); same thing
+				last = last.getNext(); 
 
 			}
-			size = size + 1;
+			size = size + 1; 
 		}
 
 		public BTreeNode getLast() {
