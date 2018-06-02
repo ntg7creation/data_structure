@@ -17,9 +17,10 @@ public class HashTableIterator implements Iterator<HashListElements> {
 		allItems = Items;
 		currentSlot = 0;
 		currentData = null;
-		for (; currentSlot <= allItems.length || currentData != null; currentSlot++)
-			currentData = allItems[currentSlot].getAllElements().getFirst();
-
+		for (; currentSlot < allItems.length && currentData == null; currentSlot++) {
+			if (allItems[currentSlot] != null)
+				currentData = allItems[currentSlot].getAllElements().getFirst();
+		}
 	}
 
 	@Override
@@ -33,11 +34,10 @@ public class HashTableIterator implements Iterator<HashListElements> {
 		if (!hasNext())
 			throw new NoSuchElementException();
 
-		
 		HashListElements next = currentData.getData();
 		currentData = currentData.getNext();
 		if (currentData == null)
-			for (; currentSlot <= allItems.length || currentData != null; currentSlot++)
+			for (; currentSlot < allItems.length && currentData == null; currentSlot++)
 				currentData = allItems[currentSlot].getAllElements().getFirst();
 		return next;
 	}

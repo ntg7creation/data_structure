@@ -24,8 +24,7 @@ public class BTreeNode {
 		n = 0;
 		this.tVal = tVal;
 		
-	}
-	
+	}	
 	
 	public BTreeNode search (String k) {
 		int i = 0;

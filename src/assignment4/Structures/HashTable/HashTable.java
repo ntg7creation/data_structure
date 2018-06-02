@@ -8,12 +8,16 @@ public class HashTable  implements Iterable<HashListElements>{
 
 	public HashTable(String msg, int tableIntSize) {
 		Slots = new HashList[tableIntSize];
-		for (HashList hashList : Slots)
-			hashList = new HashList();
+		for(int i = 0;i<Slots.length;i++)
+			Slots[i] = new HashList();
+//		for (HashList hashList : Slots)
+//			hashList = new HashList();
 
 		String[] words = msg.split(" ");
 		for (String str : words) {
-			System.out.println(str);
+			System.out.println(str + " was just inserted into slot: " + HashFunctions.hash1(Slots.length, str));
+
+			Insert(str);
 		}
 	}
 
@@ -50,13 +54,18 @@ public class HashTable  implements Iterable<HashListElements>{
 		Slots = newTable;
 	}
 
-	public static void main(String arg[]) {
-		new HashTable("hi this is a test to split a messge", 16);
-	}
 
 	@Override
 	public Iterator<HashListElements> iterator() {
 		return new HashTableIterator(Slots);
+	}
+	
+	public static void main(String arg[]) {
+		String msg = "hi this is a test to split a messge";
+		HashTable table = new HashTable(msg, 16);
+		for (HashListElements hashListElements : table) {
+			System.out.println(hashListElements.getKey()+" was inserted " + hashListElements.getCount() +" times");
+		}
 	}
 
 }
