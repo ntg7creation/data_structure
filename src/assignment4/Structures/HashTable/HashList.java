@@ -32,12 +32,13 @@ public class HashList implements Iterable<HashListElements> {
 		return null;
 	}
 
-	public void deleteElement(String key) {
+	public Boolean deleteElement(String key) {
 		for (HashListElements element : this) 
 			if (element.getKey().equals(key)) {
 				words.removeNode(element);
-				return;
+				return true;
 			}
+		return false;
 		
 	}
 

@@ -1,5 +1,6 @@
 package assignment4.components;
 
+import assignment4.Messages;
 
 public class Spam {
 
@@ -31,5 +32,6 @@ public class Spam {
 		String output = word +" "+ prs;
 		return output;
 	}
+	
 	
 }

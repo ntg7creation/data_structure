@@ -1,11 +1,15 @@
 package assignment4.Structures.List;
 
+import java.util.Iterator;
+
+import assignment4.components.Message;
+
 /**
  * 
  * @author natai & 208768150
  * @author bar & 205817521
  */
-public class MyList<T> {
+public class MyList<T> implements Iterable<T>  {
 
 	private MyNode<T> root;
 	private MyNode<T> last;
@@ -28,12 +32,14 @@ public class MyList<T> {
 		if (next == null) {
 			last = list.getLast();
 		}
+		size += list.getSize();
 		return removeNode(n);
 	}
 
 	public MyNode<T> removeNode(MyNode<T> n) {
 		n.setNext(null);
 		n.setPre(null);
+		size--;
 		return n;
 	}
 
@@ -73,10 +79,21 @@ public class MyList<T> {
 		size++;
 	}
 
+	public int getSize()
+	{
+		return size;
+	}
+	
 	public Boolean isEmpty() {
 		if (size == 0)
 			return true;
 		return false;
+	}
+
+
+	@Override
+	public Iterator<T> iterator() {
+		return new LinkedListIterator<T>(root);
 	}
 
 }

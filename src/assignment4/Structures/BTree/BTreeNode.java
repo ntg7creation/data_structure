@@ -44,6 +44,7 @@ public class BTreeNode {
 	
 	//Run time : O(t)
 	public void splitChild (BTreeNode x, BTreeNode y, int i) {
+	
 		BTreeNode z = new BTreeNode(tVal,y.isLeaf );
 		z.n = t-1;
 		for (int j = 0; j < t-1 ; j++) {
