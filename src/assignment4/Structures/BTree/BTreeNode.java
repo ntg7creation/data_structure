@@ -5,30 +5,34 @@ import assignment4.Structures.Queue.QueueAsLinkedList;
 public class BTreeNode {
 	
 	private int t;
-	private key keys[];
+	private String keys[];
 	private boolean isLeaf;
 	private BTreeNode children[];
 	private int n; // number of keys
 	private String tVal;
+	private BTreeNode pre;
+	private BTreeNode next;
+	int hight;
+	BTreeNode father;
 	
 		
 	public BTreeNode (String tVal, boolean isLeaf) {
 		this.t = Integer.parseInt(tVal);
 		children = new BTreeNode[2*t];
 		this.isLeaf = isLeaf;
-		keys = new key[(2*t) -1];
+		keys = new String[(2*t) -1];
 		n = 0;
 		this.tVal = tVal;
 		
 	}
 	
 	
-	public BTreeNode search (int k) {
+	public BTreeNode search (String k) {
 		int i = 0;
-		while ((i < this.n) & (k > this.keys[i].k)) {
+		while ((i < this.n) & (k.compareTo(this.keys[i]) > 0)) {
 			i = i+1;
 		}
-		if(i <= this.n & k == this.keys[i].k) {
+		if(i <= this.n & k.compareTo(this.keys[i]) == 0) {
 			return this;
 		}
 		if (this.isLeaf)
@@ -38,6 +42,8 @@ public class BTreeNode {
 			
 		return null;
 	}
+	
+	
 	
 	public void splitChild (BTreeNode x, BTreeNode y, int i) {
 		BTreeNode z = new BTreeNode(tVal,y.isLeaf );
@@ -53,7 +59,7 @@ public class BTreeNode {
 		y.n = t-1;
 		
 		for (int j = x.n ; j >= i ; j--) {
-			x.children[j+1] = x.children[j];
+			x.children[j+1] = x.children[j]; 
 		}
 		x.children[i] = z;
 		for (int j = x.n-1 ; j >= i-1; j-- ) {
@@ -64,11 +70,11 @@ public class BTreeNode {
 		
 		}
 	
-	public void insertNonFull(key newKey) {
+	public void insertNonFull(String newKey) {
 		int i = n;
 		if (isLeaf) {
 
-			while (i >= 1 && newKey.k < keys[i-1].k) {
+			while (i >= 1 && newKey.compareTo(keys[i-1]) < 0) {
 				keys[i] = keys[i-1];
 				i = i-1;
 			}
@@ -76,13 +82,14 @@ public class BTreeNode {
 			keys[i] = newKey;
 			n = n + 1;
 		}
+		
 		else {
-			while ( i >= 1 && newKey.k < keys[i-1].k) {
+			while ( i >= 1 && newKey.compareTo(keys[i-1]) < 0) {
 				i = i-1;
 			}
-			if (children[i] != null &&(children[i]).n == (2*t)-1) {
-				splitChild(this, children[i], i+1);
-				if (newKey.k > keys[i-1].k) {
+			if (children[i] != null && ((children[i]).n == (2*t)-1)) {
+				splitChild(this, children[i], i+1); 
+				if (newKey.compareTo(keys[i]) > 0) {
 					i = i+1;
 				}
 			}
@@ -101,15 +108,15 @@ public class BTreeNode {
 	}
 
 
-	public key[] getKeys() {
+	public String[] getKeys() {
 		return keys;
 	}
 
-	public key getKey(int index) {
+	public String getKey(int index) {
 		return keys[index];
 	}
 
-	public void setKeys(key newKey, int index) {
+	public void setKeys(String newKey, int index) {
 		this.keys[index] = newKey;
 	}
 
@@ -159,33 +166,77 @@ public class BTreeNode {
 		this.tVal = tVal;
 	}
 
+	public void setPre (BTreeNode n) {
+		pre = n;
+	}
+	
+	public void setNext (BTreeNode n) {
+		next = n;
+	}
+	
+	public BTreeNode getPre () {
+		return pre;
+	}
+	
+	public BTreeNode getNext () {
+		return next;
+	}
+	
+	
+	
 	
 	public String BFS (String BFS) {
-		QueueAsLinkedList<Object> qNodes = new QueueAsLinkedList<Object>(); 
+		Queue qNodes = new Queue(); 
+		BTreeNode curr =this; 
+		BTreeNode prev;
 		qNodes.enqueue(this); 
-		System.out.println(BFS);
-
+		this.hight = 0;
+		
 		while (!qNodes.isEmpty()) {
-			for(int i = 0; i < this.getN()  ; i++){	
-				BFS = BFS + this.getKey(i).friends;
-				if (i < this.getN() -1) {
-					BFS = BFS + ",";
-				}
-			}
-			qNodes.dequeue();
-		} 
-
-		System.out.println(BFS);
-
-		if(!this.isLeaf())	{
-			BFS = BFS + "#";
-			for(int i = 0; i < this.getN()  ; i++){				
-				if(this.getChild(i) != null ){	
-					this.getChild(i).BFS(BFS);
+			prev = curr;
+			curr= qNodes.dequeue();
+		
+			if (curr != this) {
+				if (prev.hight == curr.hight & prev.father == curr.father) 
 					BFS = BFS + "|";
-				}
+				if (prev.hight == curr.hight & prev.father != curr.father) 
+					BFS = BFS + "^";
+				if (prev.hight != curr.hight) 
+					BFS = BFS + "#";
+			}
+			
+			for (int i = 0 ; i < curr.getN() ; i++) {
+				BFS = BFS + curr.getKey(i);
+				if (i < curr.getN() - 1)
+					BFS = BFS + ",";
+			}
+						
+			for (int i = 0 ;curr.getChild(i) != null && i <= curr.getN() ; i++) {
+					curr.getChild(i).father = curr;	
+					curr.getChild(i).hight = curr.getChild(i).father.hight + 1;
+				qNodes.enqueue(curr.getChild(i));
 			}
 		}
 		return BFS;
 	}
+	
+	
+	public void print() { // in order
+		int i;
+		String output = "";
+		for( i = 0 ; i < this.getN(); i++) {
+			if (!isLeaf) {
+				this.getChild(i).print();
+			}
+			output = output + " " +this.getKey(i);
+		}
+		
+		if(!this.isLeaf())	{			
+			this.getChild(i).print();		
+		}
+		
+		System.out.println(output);
+	}
+
+	
 }

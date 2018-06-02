@@ -1,6 +1,8 @@
 package assignment4.Structures.Queue;
 
 import assignment4.Structures.List.MyList;
+import assignment4.Structures.List.MyNode;
+
 import java.util.NoSuchElementException;
 
 
@@ -26,13 +28,13 @@ public class QueueAsLinkedList <T>{
 	public T dequeue() {
 		if(isEmpty()) 
 			throw new NoSuchElementException();
-		return   (T) list.getFirst();
+		return  (T) list.removeNode(list.getFirst());
 	}
 
 	public T peek() {
 		if(isEmpty()) 
 			throw new NoSuchElementException();
-		return  (T) list.getFirst();
+		return   (T) list.getFirst();
 	}
 
 }
