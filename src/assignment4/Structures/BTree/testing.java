@@ -25,7 +25,7 @@ public class testing {
 		
 		BT.printBFS();
 		//BT.print();
-		
+		//BT.PrintTree();
 
 		
 	}
