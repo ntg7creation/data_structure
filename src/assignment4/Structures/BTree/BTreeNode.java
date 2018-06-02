@@ -26,20 +26,21 @@ public class BTreeNode {
 	}	
 	//Run time : O(th)
 	public BTreeNode search (String k) {
-		int i = 0;
-		while ((i < this.n) & (k.compareTo(this.keys[i]) > 0)) {
+		int i = 0;		
+		while ((i < this.n) && (k.compareTo(this.keys[i]) > 0)) {
 			i = i+1;
 		}
-		if(i <= this.n & k.compareTo(this.keys[i]) == 0) {
+	
+		if(i < this.n && k.compareTo(this.keys[i]) == 0) {
 			return this;
 		}
 		if (this.isLeaf)
 			return null;
-		else 
-			children[i].search(k);
-			
-		return null;
+		else {
+			return children[i].search(k);
+		}
 	}
+	
 	
 	
 	//Run time : O(t)

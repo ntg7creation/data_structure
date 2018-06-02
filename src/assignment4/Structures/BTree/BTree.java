@@ -65,6 +65,15 @@ public class BTree {
 		return tVal;
 	}
 	
+	public boolean areFreinds( String person1, String person2) {
+		String option1 = person1+ " & " + person2;
+		String option2 = person2+ " & " + person1;
+		
+		if (search(option1) != null | search(option2) != null)
+			return true;
+
+		return false;
+	}
 	
 	//Run time : O(1)
 	// creates a String with all the Friends in BFS order
