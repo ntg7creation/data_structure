@@ -17,6 +17,9 @@ public class BTreeNode {
 	//Run time : O(1)	
 	public BTreeNode (String tVal, boolean isLeaf) {
 		this.t = Integer.parseInt(tVal);
+		if (t <= 0) {
+			throw new IllegalArgumentException();
+		}
 		children = new BTreeNode[2*t];
 		this.isLeaf = isLeaf;
 		keys = new String[(2*t) -1];
@@ -73,12 +76,10 @@ public class BTreeNode {
 	public void insertNonFull(String newKey) {
 		int i = n; // n = number of keys in this node
 		if (isLeaf) { // if this is a leaf we look for the place for this key in this node.
-
 			while (i >= 1 && newKey.compareTo(keys[i-1]) < 0) {
 				keys[i] = keys[i-1];
 				i = i-1;
 			}
-			
 			keys[i] = newKey;
 			n = n + 1;
 		}

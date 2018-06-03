@@ -16,20 +16,41 @@ public class BTree {
 			t = 2;// defual
 			throw e;
 		}
+		t = Integer.parseInt(tVal);
+		if (t <= 0) {
+			throw new IllegalArgumentException();
+		}
 		root = null;
 		this.tVal = tVal;
 	}
 
-	// Run time : O(th)
-	public BTreeNode search(String k) {
-		if (root != null) // if the tree is not empty ask for the root to search
+	
+	//Run time : O(th)
+	public BTreeNode search (String k) {
+		if (k == null) {
+			throw new NullPointerException();
+		}
+		if (k == "") {
+			throw new IllegalArgumentException();
+		}
+		if (root!=null) // if the tree is not empty ask for the root to search
 			return root.search(k);
 		return null; // if empty return null
 	}
 
 	// Run time : O (1)
+	
+	//Run time : O (th)
 	// insert new key to the tree
-	public void insert(String newKey) {
+
+
+	public void insert (String newKey) {
+		if (newKey == null) {
+			throw new NullPointerException();
+		}
+		if (newKey == "") {
+			throw new IllegalArgumentException();
+		}
 		if (root == null) { // if the tree is empty insert to root
 			root = new BTreeNode(tVal, true);
 			root.setKeys(newKey, 0);
