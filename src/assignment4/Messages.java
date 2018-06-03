@@ -17,11 +17,13 @@ public class Messages implements Iterable<Message> {
 	private final String path = "messages.txt"; // deful path for messages in the end not used
 	MyList<Message> allMessages;
 
+	// O(1)
 	public Messages() {
 		allMessages = new MyList<Message>();
 
 	}
 
+	// O(n) n = number of lines in the current msg
 	private void creat_Msg_From_Txt(int messageStart, int messageEnd, String[] txt) {
 		String[] msg = new String[messageEnd - messageStart];
 		for (int line = messageStart; line < messageEnd; line++)
@@ -29,14 +31,18 @@ public class Messages implements Iterable<Message> {
 
 		allMessages.addLast(new Message(msg, allMessages.getSize()));
 	}
-
+	// O(n) n = number of words in msg
 	public void createHashTables(String hashint) {
-		int hashsize = Integer.parseInt(hashint);
-		for (Message msg : allMessages)
-			msg.creatHash(hashsize);
+		try {
+			int hashsize = Integer.parseInt(hashint);
+			for (Message msg : allMessages)
+				msg.creatHash(hashsize);
+		} catch (NumberFormatException e) {
+			throw e;
+		}
 
 	}
-
+	// O(spam*msg) spam = number of spam words, msg = number of msges
 	public String findSpams(String path, BTree btree) {
 		Spams trash = new Spams(path);
 		String output = "";
@@ -60,7 +66,7 @@ public class Messages implements Iterable<Message> {
 		// System.out.println(output);
 		return output;
 	}
-
+	// O(n) n = number of lines in file
 	public void generateMessages(String path) {
 		String[] txt = File_Reader.readFile(path);
 		int messageStart = 0;
@@ -79,5 +85,4 @@ public class Messages implements Iterable<Message> {
 		return new LinkedListIterator<Message>(allMessages.getFirst());
 	}
 
-	
 }

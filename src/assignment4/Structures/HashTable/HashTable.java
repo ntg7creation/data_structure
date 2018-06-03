@@ -20,44 +20,51 @@ public class HashTable implements Iterable<HashListElements> {
 			Insert(str);
 		}
 	}
-
-
-
+	//O(1)  expected
 	public HashListElements Search(String key) {
-		int keyValue = HashFunctions.hash1(Slots.length, key);
+		int keyValue = HashFunctions.hashFunction(Slots.length, key);
 		if (keyValue >= Slots.length)
 			System.out.println("error in hashfunction");
 		return Slots[keyValue].getData(key);
 	}
-
+	//O(1) without rehashing expected
 	public void Insert(String key) {
-		int keyValue = HashFunctions.hash1(Slots.length, key);
+
+		int keyValue = HashFunctions.hashFunction(Slots.length, key);
 		if (keyValue >= Slots.length)
 			System.out.println("error in hashfunction");
 		Slots[keyValue].addData(key);
 		elementsCount++;
-	}
 
+		if (elementsCount >= Slots.length)
+			ReHash();
+	}
+	//O(1) expected
 	public void Delete(String key) {
-		int keyValue = HashFunctions.hash1(Slots.length, key);
+		int keyValue = HashFunctions.hashFunction(Slots.length, key);
 		if (keyValue >= Slots.length)
 			System.out.println("error in hashfunction");
 		if (Slots[keyValue].deleteElement(key))
 			elementsCount--;
 	}
-
-	public void ReHash() {
+ 
+	//O(n)
+	private void ReHash() {
 		int nextSize = 2 * Slots.length;
 		HashList[] newTable = new HashList[nextSize];
+		for (int i = 0; i < newTable.length; i++)
+			newTable[i] = new HashList();
+
 		for (HashListElements elements : this) {
-			int keyValue = HashFunctions.hash1(nextSize, elements.getKey());
+			int keyValue = HashFunctions.hashFunction(nextSize, elements.getKey());
 			if (keyValue >= nextSize)
 				System.out.println("error in hashfunction");
-			Slots[keyValue].addData(elements.getKey());
+			for (int i = 0; i < elements.getCount(); i++)
+				newTable[keyValue].addData(elements.getKey());
 		}
 		Slots = newTable;
 	}
-	
+
 	/**
 	 * @return the elementsCount
 	 */
@@ -70,6 +77,13 @@ public class HashTable implements Iterable<HashListElements> {
 		return new HashTableIterator(Slots);
 	}
 
-
+	public static void main(String[] arg) {
+		HashTable table = new HashTable("test test test ok test not ok ok not this is a test check not", 8);
+		for (HashListElements hashListElements : table) {
+			System.out.println(hashListElements.getKey() + " " + hashListElements.getCount());
+		}
+		int a = Integer.parseInt("not a int");
+		System.out.println();
+	}
 
 }

@@ -10,6 +10,7 @@ public class Message {
 	private String content = "";
 	private HashTable mywords;
 
+	//O(n) n = number of lines
 	public Message(String[] txt, int msgNumber) {
 		mywords = null;
 		this.msgNumber = msgNumber;
@@ -23,45 +24,47 @@ public class Message {
 
 	}
 
+	//O(n) n = number of words in msg
 	public void creatHash(int hashsize) {
 		mywords = new HashTable(content, hashsize);
 	}
 
+	//O(1)
 	/**
 	 * @return the sender
 	 */
 	public String getSender() {
 		return Sender;
 	}
-
+	//O(1)
 	/**
 	 * @return the recipient
 	 */
 	public String getRecipient() {
 		return Recipient;
 	}
-
+	//O(1)
 	/**
 	 * @return the content
 	 */
 	public String getContent() {
 		return content;
 	}
-
+	//O(1)
 	/**
 	 * @return the mywords
 	 */
 	public HashTable getMywords() {
 		return mywords;
 	}
-
+	//O(1)
 	/**
 	 * @return the msgNumber
 	 */
 	public int getMsgNumber() {
 		return msgNumber;
 	}
-
+	//O(1)
 	@Override
 	public String toString() {
 		String output = Sender + "\n" + Recipient + "\n" + content;
