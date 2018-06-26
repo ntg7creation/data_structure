@@ -22,7 +22,7 @@ public class Tester {
 
         //constructors safety test
         //-----------------------------------------------------------------------
-        do {
+       do {
 //            try {                                                                           //test 1
 //                BTree test = new BTree("-1");
 //                System.out.println("failed test " + num + " t cant be negative");
