@@ -1,7 +1,7 @@
 package assignment4.components.copy;
 
 public class Spam {
-
+ 
 	private String word;
 	private int prs;
 	
