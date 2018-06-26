@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import assignment4.Structures.List.LinkedListIterator;
 import assignment4.Structures.List.MyList;
-import assignment4.Structures.List.MyNode;
 
 public class HashList implements Iterable<HashListElements> {
 

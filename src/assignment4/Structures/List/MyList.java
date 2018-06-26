@@ -2,8 +2,6 @@ package assignment4.Structures.List;
 
 import java.util.Iterator;
 
-import assignment4.components.Message;
-
 /**
  * 
  * @author natai & 208768150

@@ -10,13 +10,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import assignment4.Messages;
 import assignment4.Structures.BTree.BTree;
-import assignment4.Structures.HashTable.HashTable;
 
 public class Tester {
     public static void main(String args[]){
@@ -25,24 +23,24 @@ public class Tester {
         //constructors safety test
         //-----------------------------------------------------------------------
         do {
-            try {                                                                           //test 1
-                BTree test = new BTree("-1");
-                System.out.println("failed test " + num + " t cant be negative");
-                num++;
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("success test " + num);
-                num++;
-            }
-            try {                                                                           //test 2
-                BTree test = new BTree("0");
-                System.out.println("failed test " + num + " t cant be 0");
-                num++;
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("success test " + num);
-                num++;
-            }
+//            try {                                                                           //test 1
+//                BTree test = new BTree("-1");
+//                System.out.println("failed test " + num + " t cant be negative");
+//                num++;
+//                break;
+//            } catch (IllegalArgumentException e) {
+//                System.out.println("success test " + num);
+//                num++;
+//            }
+//            try {                                                                           //test 2
+//                BTree test = new BTree("0");
+//                System.out.println("failed test " + num + " t cant be 0");
+//                num++;
+//                break;
+//            } catch (IllegalArgumentException e) {
+//                System.out.println("success test " + num);
+//                num++;
+//            }
 //            try {                                                                           //test 3
 //                HashTable test = new HashTable("-1");
 //                System.out.println("failed test " + num + " m cant be negative");
@@ -252,8 +250,10 @@ public class Tester {
                         writer.println("To:"+line.substring(line.indexOf('&')+1));
                         writer.println(builder.toString());
                         builder.delete(0,builder.length()-1);
+                        if(scan.hasNextLine())
                         writer.println("#");
                     }
+                    scan.close();
                     writer.close();
                 }
                 catch (Exception e){

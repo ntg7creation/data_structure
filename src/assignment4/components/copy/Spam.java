@@ -1,4 +1,4 @@
-package assignment4.components;
+package assignment4.components.copy;
 
 public class Spam {
 

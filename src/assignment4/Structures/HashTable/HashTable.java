@@ -76,14 +76,4 @@ public class HashTable implements Iterable<HashListElements> {
 	public Iterator<HashListElements> iterator() {
 		return new HashTableIterator(Slots);
 	}
-
-	public static void main(String[] arg) {
-		HashTable table = new HashTable("test test test ok test not ok ok not this is a test check not", 8);
-		for (HashListElements hashListElements : table) {
-			System.out.println(hashListElements.getKey() + " " + hashListElements.getCount());
-		}
-		int a = Integer.parseInt("not a int");
-		System.out.println();
-	}
-
 }
